@@ -9,6 +9,9 @@ import { Provider as PaperProvider } from "react-native-paper";
 import Home from "./screens/Home/Home";
 import EvePlanner from "./screens/EvePlanner/EvePlanner";
 import Years from "./screens/Years/Years";
+import Notes from "./screens/Notes/Notes";
+import ContactUs from "./screens/ContactUs/ContactUs";
+import FlashMessage from "react-native-flash-message";
 
 const HomeStack = createStackNavigator();
 
@@ -17,6 +20,8 @@ const HomeStackScreen = (props) => (
     <HomeStack.Screen name="Home" component={Home} />
     <HomeStack.Screen name="Years" component={Years} />
     <HomeStack.Screen name="Eve" component={EvePlanner} />
+    <HomeStack.Screen name="Notes" component={Notes} />
+    <HomeStack.Screen name="Contact" component={ContactUs} />
   </HomeStack.Navigator>
 );
 
@@ -26,6 +31,7 @@ export default function App() {
       <PaperProvider>
         <HomeStackScreen />
       </PaperProvider>
+      <FlashMessage position="top" />
     </NavigationContainer>
   );
 }

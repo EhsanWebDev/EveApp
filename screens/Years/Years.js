@@ -17,33 +17,33 @@ const Years = ({ navigation }) => {
       <View style={styles.year_container}>
         <View style={styles.row}>
           <Button
-            mode="contained"
             style={[styles.btn, { padding: 2 }]}
             onPress={() =>
               navigation.navigate("Eve", {
-                date: year + "-" + "01" + "-" + day,
+                date: year + "-" + "01" + "-" + "01",
+                month: "January",
               })
             }
           >
             January
           </Button>
           <Button
-            mode="contained"
             style={styles.btn}
             onPress={() =>
               navigation.navigate("Eve", {
-                date: year + "-" + "02" + "-" + day,
+                date: year + "-" + "02" + "-" + "01",
+                month: "February",
               })
             }
           >
             February
           </Button>
           <Button
-            mode="contained"
             style={styles.btn}
             onPress={() =>
               navigation.navigate("Eve", {
-                date: year + "-" + "03" + "-" + day,
+                date: year + "-" + "03" + "-" + "01",
+                month: "March",
               })
             }
           >
@@ -55,7 +55,8 @@ const Years = ({ navigation }) => {
             style={styles.btn}
             onPress={() =>
               navigation.navigate("Eve", {
-                date: year + "-" + "04" + "-" + day,
+                date: year + "-" + "04" + "-" + "01",
+                month: "April",
               })
             }
           >
@@ -65,7 +66,8 @@ const Years = ({ navigation }) => {
             style={styles.btn}
             onPress={() =>
               navigation.navigate("Eve", {
-                date: year + "-" + "05" + "-" + day,
+                date: year + "-" + "05" + "-" + "01",
+                month: "May",
               })
             }
           >
@@ -75,7 +77,8 @@ const Years = ({ navigation }) => {
             style={styles.btn}
             onPress={() =>
               navigation.navigate("Eve", {
-                date: year + "-" + "06" + "-" + day,
+                date: year + "-" + "06" + "-" + "01",
+                month: "June",
               })
             }
           >
@@ -84,33 +87,33 @@ const Years = ({ navigation }) => {
         </View>
         <View style={styles.row}>
           <Button
-            mode="contained"
             style={styles.btn}
             onPress={() =>
               navigation.navigate("Eve", {
-                date: year + "-" + "07" + "-" + day,
+                date: year + "-" + "07" + "-" + "01",
+                month: "July",
               })
             }
           >
             July
           </Button>
           <Button
-            mode="contained"
             style={styles.btn}
             onPress={() =>
               navigation.navigate("Eve", {
-                date: year + "-" + "08" + "-" + day,
+                date: year + "-" + "08" + "-" + "01",
+                month: "August",
               })
             }
           >
             August
           </Button>
           <Button
-            mode="contained"
             style={styles.btn}
             onPress={() =>
               navigation.navigate("Eve", {
-                date: year + "-" + "09" + "-" + day,
+                date: year + "-" + "09" + "-" + "01",
+                month: "September",
               })
             }
           >
@@ -122,7 +125,8 @@ const Years = ({ navigation }) => {
             style={styles.btn}
             onPress={() =>
               navigation.navigate("Eve", {
-                date: year + "-" + "10" + "-" + day,
+                date: year + "-" + "10" + "-" + "01",
+                month: "October",
               })
             }
           >
@@ -132,7 +136,8 @@ const Years = ({ navigation }) => {
             style={styles.btn}
             onPress={() =>
               navigation.navigate("Eve", {
-                date: year + "-" + "11" + "-" + day,
+                date: year + "-" + "11" + "-" + "01",
+                month: "November",
               })
             }
           >
@@ -142,7 +147,8 @@ const Years = ({ navigation }) => {
             style={styles.btn}
             onPress={() =>
               navigation.navigate("Eve", {
-                date: year + "-" + "12" + "-" + day,
+                date: year + "-" + "12" + "-" + "01",
+                month: "December",
               })
             }
           >

@@ -150,6 +150,7 @@ const Home = ({ navigation }) => {
             alignItems: "center",
             backgroundColor: "transparent",
           }}
+          onPress={() => navigation.push("Contact")}
         >
           <LinearGradient
             // Button Linear Gradient
