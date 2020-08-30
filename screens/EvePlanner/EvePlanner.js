@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 import {
   List,
   Title,
@@ -11,6 +11,7 @@ import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import Constants from "expo-constants";
 import AsyncStorage from "@react-native-community/async-storage";
 import { showMessage } from "react-native-flash-message";
+import Cons from "expo-constants";
 class EvePlanner extends React.Component {
   state = {
     expanded: false,
@@ -20,6 +21,7 @@ class EvePlanner extends React.Component {
     loading: true,
     marked: {},
     marked_dates: [],
+
     union: "",
     confidence: "",
     diet: "",
@@ -451,7 +453,134 @@ class EvePlanner extends React.Component {
           </List.Accordion>
 
           <List.Accordion title="My New Eve Daily Planner " id="2">
-            <List.Item title="Item 2" />
+            <View style={styles.container}>
+              {/* <Text>Notes {date.dateString} </Text> */}
+              <View style={styles.notes_container}>
+                <Title
+                  numberOfLines={2}
+                  style={{
+                    marginHorizontal: 10,
+                    fontSize: 18,
+                    fontWeight: "bold",
+                    letterSpacing: 1,
+                    textAlign: "center",
+                  }}
+                >
+                  Convert your New Eve Monthly Goals into a Daily Plan
+                </Title>
+                <View style={styles.row}>
+                  <Text style={[styles.head, { width: "35%" }]}>
+                    Time of Day
+                  </Text>
+                  <Text style={[styles.head, { width: "65%" }]}>Activity</Text>
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>5am – 6am</Text>
+                  <TextInput
+                    // value={events}
+                    // onChangeText={(events) => this.setState({ events })}
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>6am – 7am</Text>
+                  <TextInput
+                    // value={events}
+                    // onChangeText={(events) => this.setState({ events })}
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>7am – 8am</Text>
+                  <TextInput
+                    // value={events}
+                    // onChangeText={(events) => this.setState({ events })}
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>8am – 9am</Text>
+                  <TextInput
+                    // value={events}
+                    // onChangeText={(events) => this.setState({ events })}
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>
+                    9am – 10am
+                  </Text>
+                  <TextInput
+                    // value={events}
+                    // onChangeText={(events) => this.setState({ events })}
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>
+                    10am – 11am
+                  </Text>
+                  <TextInput
+                    // value={events}
+                    // onChangeText={(events) => this.setState({ events })}
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>
+                    11am – 12pm
+                  </Text>
+                  <TextInput
+                    // value={events}
+                    // onChangeText={(events) => this.setState({ events })}
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>
+                    12pm – 1pm
+                  </Text>
+                  <TextInput
+                    // value={events}
+                    // onChangeText={(events) => this.setState({ events })}
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>1pm – 2pm</Text>
+                  <TextInput
+                    // value={events}
+                    // onChangeText={(events) => this.setState({ events })}
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>2pm – 3pm</Text>
+                  <TextInput
+                    // value={events}
+                    // onChangeText={(events) => this.setState({ events })}
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>3pm – 4pm</Text>
+                  <TextInput
+                    // value={events}
+                    // onChangeText={(events) => this.setState({ events })}
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+              </View>
+              <View style={{ marginTop: 30, marginHorizontal: 40 }}>
+                <Button
+                  mode="contained"
+                  style={{ borderRadius: 5 }}
+                  onPress={() => this.handleNotesChange()}
+                >
+                  Save
+                </Button>
+              </View>
+            </View>
           </List.Accordion>
 
           <Calendar
@@ -547,5 +676,60 @@ class EvePlanner extends React.Component {
     }
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  notes_container: {
+    flex: 1,
+    marginHorizontal: 10,
+  },
+  row: {
+    flexDirection: "row",
+    overflow: "hidden",
+
+    // marginVertical: 2,
+  },
+  head: {
+    width: "50%",
+    backgroundColor: "#27ae60",
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+    borderColor: "#000",
+    borderBottomColor: "#fff",
+    borderWidth: 1,
+    paddingVertical: 5,
+  },
+  body: {
+    width: "50%",
+    // backgroundColor: "#27ae60",
+    // color: "white",
+    fontSize: 15,
+
+    letterSpacing: 1,
+    // fontWeight: "bold",
+    textAlign: "center",
+    paddingHorizontal: 10,
+    borderColor: "#000",
+    borderWidth: 1,
+    borderRightColor: "#000",
+    borderTopColor: "#fff",
+    // paddingVertical: 5,
+    textAlignVertical: "center",
+    height: 45,
+  },
+  input: {
+    // paddingVertical: 1,
+    borderColor: "#000",
+    borderWidth: 1,
+    // borderLeftColor: "transparent",
+    backgroundColor: "white",
+    borderTopColor: "white",
+    height: 40,
+  },
+});
 
 export default EvePlanner;

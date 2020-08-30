@@ -71,11 +71,11 @@ class Notes extends React.Component {
     } = this.state;
     const data = { events, insights, bodyTemp, fluid, evePlan, changes };
     if (
-      events !== "" &&
-      evePlan !== "" &&
-      insights !== "" &&
-      bodyTemp !== "" &&
-      changes !== "" &&
+      events !== "" ||
+      evePlan !== "" ||
+      insights !== "" ||
+      bodyTemp !== "" ||
+      changes !== "" ||
       fluid !== ""
     ) {
       const dataToBeSaved = JSON.stringify(data);
@@ -133,6 +133,8 @@ class Notes extends React.Component {
         });
       }
     }
+
+    console.log(data);
   };
 
   render() {
