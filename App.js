@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, YellowBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Provider as PaperProvider } from "react-native-paper";
@@ -20,25 +20,13 @@ import logger from "redux-logger";
 import Forum from "./screens/Forum/Forum";
 import Login from "./screens/Auth/Login";
 import Signup from "./screens/Auth/Signup";
+import Chat from "./screens/Forum/Chat";
 const middlewares = [logger];
 const store = createStore(reducer, {}, applyMiddleware(...middlewares));
 
 const HomeStack = createStackNavigator();
 
-var firebaseConfig = {
-  apiKey: "AIzaSyBS3p8FcWRz7BHTk62hR9c-i3iP88HNAXs",
-  authDomain: "eveapp-40813.firebaseapp.com",
-  databaseURL: "https://eveapp-40813.firebaseio.com",
-  projectId: "eveapp-40813",
-  storageBucket: "eveapp-40813.appspot.com",
-  messagingSenderId: "265476243004",
-  appId: "1:265476243004:web:2e71ccd2c9237dca364d39",
-};
-
-// Initialize Firebase
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+YellowBox.ignoreWarnings(["Setting a timer"]);
 
 const HomeStackScreen = (props) => (
   <HomeStack.Navigator headerMode="none">
@@ -50,6 +38,7 @@ const HomeStackScreen = (props) => (
     <HomeStack.Screen name="Forum" component={Forum} />
     <HomeStack.Screen name="Login" component={Login} />
     <HomeStack.Screen name="Signup" component={Signup} />
+    <HomeStack.Screen name="Chat" component={Chat} />
   </HomeStack.Navigator>
 );
 

@@ -5,6 +5,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import firebase from "firebase";
 import { ActivityIndicator } from "react-native-paper";
+import { createUserProfileDocument } from "../../Firebase";
 
 class Signup extends Component {
   state = {
@@ -13,6 +14,7 @@ class Signup extends Component {
     checked: null,
     error: false,
     loading: false,
+    displayName: "",
   };
   handleCheck = () => {
     const { checked } = this.state;
@@ -22,27 +24,43 @@ class Signup extends Component {
       this.setState({ checked: "check" });
     }
   };
-  signup = async (email, password) => {
+  signup = async () => {
     this.setState({ loading: true });
-    firebase
+    const { email, password, displayName } = this.state;
+    const { user } = await firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        // console.log(userCredentials.user.uid);
-        this.setState({
-          loading: false,
-          email: "",
-          password: "",
-          error: false,
-        });
-        this.props.navigation.navigate("Home", {
-          uid: userCredentials.user.uid,
-        });
-      })
-      .catch((error) => {
-        this.setState({ error: error.message, loading: false });
-        console.log(this.state);
-      });
+      .createUserWithEmailAndPassword(email, password);
+    createUserProfileDocument(user, { displayName });
+
+    this.setState({
+      loading: false,
+      email: "",
+      password: "",
+      error: false,
+    });
+    this.props.navigation.navigate("Forum", {
+      uid: user.uid,
+    });
+
+    // firebase
+    //   .auth()
+    //   .createUserWithEmailAndPassword(email, password)
+    //   .then((userCredentials) => {
+    //     // console.log(userCredentials.user.uid);
+    //     this.setState({
+    //       loading: false,
+    //       email: "",
+    //       password: "",
+    //       error: false,
+    //     });
+    //     this.props.navigation.navigate("Forum", {
+    //       uid: userCredentials.user.uid,
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     this.setState({ error: error.message, loading: false });
+    //     console.log(this.state);
+    //   });
   };
   render() {
     if (this.state.loading) {
@@ -89,6 +107,11 @@ class Signup extends Component {
             SIGNUP
           </Text>
           <Input
+            placeholder="Enter Your Display Name"
+            handleChange={(name) => this.setState({ displayName: name })}
+            value={this.state.displayName}
+          />
+          <Input
             placeholder="Enter email"
             handleChange={(email) => this.setState({ email })}
             value={this.state.email}
@@ -125,7 +148,7 @@ class Signup extends Component {
           >
             <TouchableOpacity
               style={{ padding: 10 }}
-              onPress={() => this.signup(this.state.email, this.state.password)}
+              onPress={() => this.signup()}
             >
               <Text
                 style={{

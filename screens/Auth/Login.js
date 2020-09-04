@@ -35,7 +35,7 @@ class Login extends Component {
           password: "",
           error: false,
         });
-        this.props.navigation.navigate("Home", {
+        this.props.navigation.navigate("Forum", {
           uid: user.user.uid,
         });
       })
