@@ -27,6 +27,22 @@ class EvePlanner extends React.Component {
     diet: "",
     rhythm: "",
     influence: "",
+
+    five_to_six: "",
+    six_to_seven: "",
+    seven_to_eight: "",
+    eight_to_nine: "",
+    nine_to_ten: "",
+    ten_to_eleven: "",
+    eleven_to_twelve_pm: "",
+    twelve_to_one_pm: "",
+    one_to_two_pm: "",
+    two_to_three_pm: "",
+    three_to_four_pm: "",
+    four_to_five_pm: "",
+    five_to_six_pm: "",
+    six_to_seven_pm: "",
+    seven_to_eight_pm: "",
   };
 
   handleUnionChange = async () => {
@@ -181,7 +197,48 @@ class EvePlanner extends React.Component {
           let union = await AsyncStorage.getItem(`${this.state.month}_union`);
           let diet = await AsyncStorage.getItem(`${this.state.month}_diet`);
           let rhythm = await AsyncStorage.getItem(`${this.state.month}_rhythm`);
+          let daily = await AsyncStorage.getItem(`${this.state.month}_daily`);
+          if (daily !== null) {
+            let parsedDaily = JSON.parse(daily);
+
+            let {
+              five_to_six,
+              six_to_seven,
+              seven_to_eight,
+              eight_to_nine,
+              nine_to_ten,
+              ten_to_eleven,
+              eleven_to_twelve_pm,
+              twelve_to_one_pm,
+              one_to_two_pm,
+              two_to_three_pm,
+              three_to_four_pm,
+              four_to_five_pm,
+              five_to_six_pm,
+              six_to_seven_pm,
+              seven_to_eight_pm,
+            } = parsedDaily;
+            this.setState({
+              five_to_six,
+              six_to_seven,
+              seven_to_eight,
+              eight_to_nine,
+              nine_to_ten,
+              ten_to_eleven,
+              eleven_to_twelve_pm,
+              twelve_to_one_pm,
+              one_to_two_pm,
+              two_to_three_pm,
+              three_to_four_pm,
+              four_to_five_pm,
+              five_to_six_pm,
+              six_to_seven_pm,
+              seven_to_eight_pm,
+            });
+          }
+
           let markedDates = await AsyncStorage.getItem("marked_dates");
+
           console.log("marked_datssss => ", markedDates);
           let influence = await AsyncStorage.getItem(
             `${this.state.month}_influence`
@@ -220,6 +277,73 @@ class EvePlanner extends React.Component {
   setMarked = (date) => {
     this.setState({ marked: { ...this.state.marked, date } });
   };
+  saveTime = async () => {
+    const {
+      five_to_six,
+      six_to_seven,
+      seven_to_eight,
+      eight_to_nine,
+      nine_to_ten,
+      ten_to_eleven,
+      eleven_to_twelve_pm,
+      twelve_to_one_pm,
+      one_to_two_pm,
+      two_to_three_pm,
+      three_to_four_pm,
+      four_to_five_pm,
+      five_to_six_pm,
+      six_to_seven_pm,
+      seven_to_eight_pm,
+
+      month,
+    } = this.state;
+
+    const data = JSON.stringify({
+      five_to_six,
+      six_to_seven,
+      seven_to_eight,
+      eight_to_nine,
+      nine_to_ten,
+      ten_to_eleven,
+      eleven_to_twelve_pm,
+      twelve_to_one_pm,
+      one_to_two_pm,
+      two_to_three_pm,
+      three_to_four_pm,
+      four_to_five_pm,
+      five_to_six_pm,
+      six_to_seven_pm,
+      seven_to_eight_pm,
+    });
+
+    try {
+      await AsyncStorage.setItem(`${month}_daily`, data);
+      showMessage({
+        message: "Saved Changes...!",
+        floating: true,
+        position: "top",
+        icon: "success",
+        type: "success",
+        animationDuration: 350,
+        duration: 1200,
+        titleStyle: { fontSize: 16, fontWeight: "bold" },
+      });
+    } catch (error) {
+      console.log(error);
+      showMessage({
+        message: "Error Occurred...!",
+        floating: true,
+        position: "top",
+        icon: "danger",
+        type: "danger",
+        animationDuration: 350,
+        duration: 1200,
+        titleStyle: { fontSize: 16, fontWeight: "bold" },
+      });
+    }
+
+    console.log(data);
+  };
   render() {
     const {
       union,
@@ -230,6 +354,22 @@ class EvePlanner extends React.Component {
       influence,
       diet,
       marked_dates,
+
+      five_to_six,
+      six_to_seven,
+      seven_to_eight,
+      eight_to_nine,
+      nine_to_ten,
+      ten_to_eleven,
+      eleven_to_twelve_pm,
+      twelve_to_one_pm,
+      one_to_two_pm,
+      two_to_three_pm,
+      three_to_four_pm,
+      four_to_five_pm,
+      five_to_six_pm,
+      six_to_seven_pm,
+      seven_to_eight_pm,
     } = this.state;
     console.log("Marked Array=>", this.state.marked);
     if (date !== 0 && loading !== true) {
@@ -477,32 +617,40 @@ class EvePlanner extends React.Component {
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>5am – 6am</Text>
                   <TextInput
-                    // value={events}
-                    // onChangeText={(events) => this.setState({ events })}
+                    value={five_to_six}
+                    onChangeText={(five_to_six) =>
+                      this.setState({ five_to_six })
+                    }
                     style={[styles.input, { width: "65%" }]}
                   />
                 </View>
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>6am – 7am</Text>
                   <TextInput
-                    // value={events}
-                    // onChangeText={(events) => this.setState({ events })}
+                    value={six_to_seven}
+                    onChangeText={(six_to_seven) =>
+                      this.setState({ six_to_seven })
+                    }
                     style={[styles.input, { width: "65%" }]}
                   />
                 </View>
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>7am – 8am</Text>
                   <TextInput
-                    // value={events}
-                    // onChangeText={(events) => this.setState({ events })}
+                    value={seven_to_eight}
+                    onChangeText={(seven_to_eight) =>
+                      this.setState({ seven_to_eight })
+                    }
                     style={[styles.input, { width: "65%" }]}
                   />
                 </View>
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>8am – 9am</Text>
                   <TextInput
-                    // value={events}
-                    // onChangeText={(events) => this.setState({ events })}
+                    value={eight_to_nine}
+                    onChangeText={(eight_to_nine) =>
+                      this.setState({ eight_to_nine })
+                    }
                     style={[styles.input, { width: "65%" }]}
                   />
                 </View>
@@ -511,8 +659,10 @@ class EvePlanner extends React.Component {
                     9am – 10am
                   </Text>
                   <TextInput
-                    // value={events}
-                    // onChangeText={(events) => this.setState({ events })}
+                    value={nine_to_ten}
+                    onChangeText={(nine_to_ten) =>
+                      this.setState({ nine_to_ten })
+                    }
                     style={[styles.input, { width: "65%" }]}
                   />
                 </View>
@@ -521,8 +671,10 @@ class EvePlanner extends React.Component {
                     10am – 11am
                   </Text>
                   <TextInput
-                    // value={events}
-                    // onChangeText={(events) => this.setState({ events })}
+                    value={ten_to_eleven}
+                    onChangeText={(ten_to_eleven) =>
+                      this.setState({ ten_to_eleven })
+                    }
                     style={[styles.input, { width: "65%" }]}
                   />
                 </View>
@@ -531,8 +683,10 @@ class EvePlanner extends React.Component {
                     11am – 12pm
                   </Text>
                   <TextInput
-                    // value={events}
-                    // onChangeText={(events) => this.setState({ events })}
+                    value={eleven_to_twelve_pm}
+                    onChangeText={(eleven_to_twelve_pm) =>
+                      this.setState({ eleven_to_twelve_pm })
+                    }
                     style={[styles.input, { width: "65%" }]}
                   />
                 </View>
@@ -541,43 +695,87 @@ class EvePlanner extends React.Component {
                     12pm – 1pm
                   </Text>
                   <TextInput
-                    // value={events}
-                    // onChangeText={(events) => this.setState({ events })}
+                    value={twelve_to_one_pm}
+                    onChangeText={(twelve_to_one_pm) =>
+                      this.setState({ twelve_to_one_pm })
+                    }
                     style={[styles.input, { width: "65%" }]}
                   />
                 </View>
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>1pm – 2pm</Text>
                   <TextInput
-                    // value={events}
-                    // onChangeText={(events) => this.setState({ events })}
+                    value={one_to_two_pm}
+                    onChangeText={(one_to_two_pm) =>
+                      this.setState({ one_to_two_pm })
+                    }
                     style={[styles.input, { width: "65%" }]}
                   />
                 </View>
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>2pm – 3pm</Text>
                   <TextInput
-                    // value={events}
-                    // onChangeText={(events) => this.setState({ events })}
+                    value={two_to_three_pm}
+                    onChangeText={(two_to_three_pm) =>
+                      this.setState({ two_to_three_pm })
+                    }
                     style={[styles.input, { width: "65%" }]}
                   />
                 </View>
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>3pm – 4pm</Text>
                   <TextInput
-                    // value={events}
-                    // onChangeText={(events) => this.setState({ events })}
+                    value={three_to_four_pm}
+                    onChangeText={(three_to_four_pm) =>
+                      this.setState({ three_to_four_pm })
+                    }
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>4pm – 5pm</Text>
+                  <TextInput
+                    value={four_to_five_pm}
+                    onChangeText={(four_to_five_pm) =>
+                      this.setState({ four_to_five_pm })
+                    }
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>5pm – 6pm</Text>
+                  <TextInput
+                    value={five_to_six_pm}
+                    onChangeText={(five_to_six_pm) =>
+                      this.setState({ five_to_six_pm })
+                    }
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>6pm – 7pm</Text>
+                  <TextInput
+                    value={six_to_seven_pm}
+                    onChangeText={(six_to_seven_pm) =>
+                      this.setState({ six_to_seven_pm })
+                    }
+                    style={[styles.input, { width: "65%" }]}
+                  />
+                </View>
+                <View style={styles.row}>
+                  <Text style={[styles.body, { width: "35%" }]}>7pm – 8pm</Text>
+                  <TextInput
+                    value={seven_to_eight_pm}
+                    onChangeText={(seven_to_eight_pm) =>
+                      this.setState({ seven_to_eight_pm })
+                    }
                     style={[styles.input, { width: "65%" }]}
                   />
                 </View>
               </View>
               <View style={{ marginTop: 30, marginHorizontal: 40 }}>
-                <Button
-                  mode="contained"
-                  style={{ borderRadius: 5 }}
-                  onPress={() => this.handleNotesChange()}
-                >
-                  Save
+                <Button mode="contained" onPress={() => this.saveTime()}>
+                  SAVE CHANGES
                 </Button>
               </View>
             </View>

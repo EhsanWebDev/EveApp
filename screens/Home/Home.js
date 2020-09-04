@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Card, Button, Title, Paragraph } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
+import { connect } from "react-redux";
 
 const { width, height } = Dimensions.get("screen");
 const Home = ({ navigation }) => {
@@ -57,6 +58,7 @@ const Home = ({ navigation }) => {
             alignItems: "center",
             backgroundColor: "transparent",
           }}
+          onPress={() => navigation.push("Forum")}
         >
           <LinearGradient
             // Button Linear Gradient
@@ -190,5 +192,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
 });
-
-export default Home;
+const mapStateToProps = (state) => {
+  console.log("state=>", state);
+  return state;
+};
+export default connect(mapStateToProps)(Home);
