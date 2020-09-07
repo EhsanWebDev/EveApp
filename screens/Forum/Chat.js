@@ -6,14 +6,17 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { StyleSheet, TextInput, View, YellowBox, Button } from "react-native";
 import * as firebase from "firebase";
 import "firebase/firestore";
+import { ActivityIndicator } from "react-native-paper";
+import { StatusBar } from "expo-status-bar";
 
 YellowBox.ignoreWarnings(["Setting a timer for a long period of time"]);
 
 const db = firebase.firestore();
 const chatsRef = db.collection("chats");
 
-export default function App() {
+export default function Chat({ route }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
   const [messages, setMessages] = useState([]);
 
@@ -31,6 +34,7 @@ export default function App() {
         })
         .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
       appendMessages(messagesFirestore);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -52,8 +56,8 @@ export default function App() {
     return colors[sumChars % colors.length];
   }
   const renderBubble = (props) => {
-    let username = props.currentMessage.user.name;
-    let color = getColor(username);
+    // let username = props.currentMessage.user.name;
+    // let color = getColor(username);
     return (
       <Bubble
         {...props}
@@ -89,32 +93,37 @@ export default function App() {
   );
 
   async function readUser() {
-    const user = await AsyncStorage.getItem("user");
+    // const user = await AsyncStorage.getItem("user");
+    const user = route.params.user;
+    const myUser = {};
+    myUser.name = user.displayName;
+    myUser._id = user.id;
+    myUser.email = user.email;
+
     if (user) {
-      setUser(JSON.parse(user));
+      setUser(myUser);
     }
   }
-  async function handlePress() {
-    const _id = Math.random().toString(36).substring(7);
-    const user = { _id, name };
-    await AsyncStorage.setItem("user", JSON.stringify(user));
-    setUser(user);
-  }
+  // async function handlePress() {
+  //   const _id = Math.random().toString(36).substring(7);
+  //   const user = { _id, name };
+  //   await AsyncStorage.setItem("user", JSON.stringify(user));
+  //   setUser(user);
+  // }
   async function handleSend(messages) {
+    console.log("user =>", user);
     const writes = messages.map((m) => chatsRef.add(m));
     await Promise.all(writes);
   }
+  const handleAvatar = (props) => {
+    console.log("props", props);
+  };
 
-  if (!user) {
+  if (loading) {
     return (
       <View style={styles.container}>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your name"
-          value={name}
-          onChangeText={setName}
-        />
-        <Button onPress={handlePress} title="Enter the chat" />
+        <StatusBar style="light" />
+        <ActivityIndicator size="large" color="#56BCCB" />
       </View>
     );
   }
@@ -126,6 +135,7 @@ export default function App() {
         user={user}
         renderUsernameOnMessage={true}
         onSend={handleSend}
+        onPressAvatar={handleAvatar}
       />
     </View>
   );
@@ -134,10 +144,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#21202E",
     alignItems: "center",
     justifyContent: "center",
-    padding: 30,
+    // padding: 30,
   },
   input: {
     height: 50,

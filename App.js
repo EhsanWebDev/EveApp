@@ -26,7 +26,10 @@ const store = createStore(reducer, {}, applyMiddleware(...middlewares));
 
 const HomeStack = createStackNavigator();
 
-YellowBox.ignoreWarnings(["Setting a timer"]);
+YellowBox.ignoreWarnings([
+  "Setting a timer",
+  "Non-serializable values were found in the navigation state",
+]);
 
 const HomeStackScreen = (props) => (
   <HomeStack.Navigator headerMode="none">

@@ -156,7 +156,11 @@ export default class Forum extends Component {
 
             <View style={styles.menuWrapper}>
               <TouchableRipple
-                onPress={() => this.props.navigation.push("Chat")}
+                onPress={() =>
+                  this.props.navigation.push("Chat", {
+                    user: this.state.user,
+                  })
+                }
               >
                 <View style={styles.menuItem}>
                   <Ionicons name="ios-chatboxes" color="#777" size={25} />
