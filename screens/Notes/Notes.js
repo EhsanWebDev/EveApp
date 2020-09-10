@@ -91,14 +91,14 @@ class Notes extends React.Component {
 
         var dates = ["marked_dates", JSON.stringify(parsedDates)];
         const obj = {};
-        obj[date.dateString] = { selected: true, selectedColor: "#6c5ce7" };
+        obj[date.dateString] = { selected: true, selectedColor: "#c44569" };
         // console.log(obj);
         this.props.route.params.marked(obj);
         console.log("parsed Dates =>", parsedDates);
       } else {
         var dates = ["marked_dates", JSON.stringify([date.dateString])];
         const obj = {};
-        obj[date.dateString] = { selected: true, selectedColor: "#6c5ce7" };
+        obj[date.dateString] = { selected: true, selectedColor: "#c44569" };
         // console.log(obj);
         this.props.route.params.marked(obj);
       }
@@ -110,7 +110,7 @@ class Notes extends React.Component {
         // console.log(dates);
         await AsyncStorage.multiSet([notesData, dates]);
         showMessage({
-          message: "Saved Changes...!",
+          message: "Changes Saved ...!",
           floating: true,
           position: "top",
           icon: "success",
@@ -237,10 +237,17 @@ class Notes extends React.Component {
               />
             </View>
           </View>
-          <View style={{ marginTop: 40, marginHorizontal: 20 }}>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "flex-end",
+              marginTop: 40,
+              marginHorizontal: 20,
+            }}
+          >
             <Button
               mode="contained"
-              style={{ borderRadius: 5 }}
+              style={{ borderRadius: 8, backgroundColor: "#c44569" }}
               onPress={() => this.handleNotesChange()}
             >
               Save

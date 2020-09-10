@@ -39,7 +39,7 @@ const Home = ({ navigation }) => {
         >
           <LinearGradient
             // Button Linear Gradient
-            colors={["#5f27cd", "#2c3e50"]}
+            colors={["#c44569", "#c44569"]}
             style={styles.card}
           >
             <Title
@@ -63,7 +63,7 @@ const Home = ({ navigation }) => {
         >
           <LinearGradient
             // Button Linear Gradient
-            colors={["#5f27cd", "#2c3e50"]}
+            colors={["#c44569", "#c44569"]}
             style={styles.card}
           >
             <Title
@@ -87,7 +87,7 @@ const Home = ({ navigation }) => {
         >
           <LinearGradient
             // Button Linear Gradient
-            colors={["#5f27cd", "#2c3e50"]}
+            colors={["#c44569", "#c44569"]}
             style={styles.card}
           >
             <Title
@@ -111,7 +111,7 @@ const Home = ({ navigation }) => {
         >
           <LinearGradient
             // Button Linear Gradient
-            colors={["#5f27cd", "#2c3e50"]}
+            colors={["#c44569", "#c44569"]}
             style={styles.card}
           >
             <Title
@@ -135,7 +135,7 @@ const Home = ({ navigation }) => {
         >
           <LinearGradient
             // Button Linear Gradient
-            colors={["#5f27cd", "#2c3e50"]}
+            colors={["#c44569", "#c44569"]}
             style={styles.card}
           >
             <Title
@@ -159,7 +159,7 @@ const Home = ({ navigation }) => {
         >
           <LinearGradient
             // Button Linear Gradient
-            colors={["#5f27cd", "#2c3e50"]}
+            colors={["#c44569", "#c44569"]}
             style={styles.card}
           >
             <Title

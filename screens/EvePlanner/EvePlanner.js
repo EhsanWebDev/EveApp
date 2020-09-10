@@ -50,7 +50,7 @@ class EvePlanner extends React.Component {
     try {
       await AsyncStorage.setItem(`${month}_union`, union);
       showMessage({
-        message: "Saved Changes...!",
+        message: "Changes Saved ...!",
         floating: true,
         position: "top",
         icon: "success",
@@ -78,7 +78,7 @@ class EvePlanner extends React.Component {
     try {
       await AsyncStorage.setItem(`${month}_confidence`, confidence);
       showMessage({
-        message: "Saved Changes...!",
+        message: "Changes Saved ...!",
         floating: true,
         position: "top",
         icon: "success",
@@ -106,7 +106,7 @@ class EvePlanner extends React.Component {
     try {
       await AsyncStorage.setItem(`${month}_diet`, diet);
       showMessage({
-        message: "Saved Changes...!",
+        message: "Changes Saved ...!",
         floating: true,
         position: "top",
         icon: "success",
@@ -134,7 +134,7 @@ class EvePlanner extends React.Component {
     try {
       await AsyncStorage.setItem(`${month}_rhythm`, rhythm);
       showMessage({
-        message: "Saved Changes...!",
+        message: "Changes Saved ...!",
         floating: true,
         position: "top",
         icon: "success",
@@ -162,7 +162,7 @@ class EvePlanner extends React.Component {
     try {
       await AsyncStorage.setItem(`${month}_influence`, influence);
       showMessage({
-        message: "Saved Changes...!",
+        message: "Changes Saved...!",
         floating: true,
         position: "top",
         icon: "success",
@@ -251,7 +251,7 @@ class EvePlanner extends React.Component {
             const parsedDates = JSON.parse(markedDates);
             console.log("parsed_dats => ", parsedDates);
             parsedDates.map((date) => {
-              return (obj[date] = { selected: true, selectedColor: "#6c5ce7" });
+              return (obj[date] = { selected: true, selectedColor: "#c44569" });
             });
             console.log("marked_dates => ", obj);
             this.setState({
@@ -319,7 +319,7 @@ class EvePlanner extends React.Component {
     try {
       await AsyncStorage.setItem(`${month}_daily`, data);
       showMessage({
-        message: "Saved Changes...!",
+        message: "Changes Saved ...!",
         floating: true,
         position: "top",
         icon: "success",

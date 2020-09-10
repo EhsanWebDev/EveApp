@@ -209,7 +209,11 @@ export default class Forum extends Component {
               marginHorizontal: 20,
             }}
           >
-            <Button mode="contained" onPress={() => firebase.auth().signOut()}>
+            <Button
+              mode="contained"
+              style={{ backgroundColor: "#c44569" }}
+              onPress={() => firebase.auth().signOut()}
+            >
               Sign Out
             </Button>
           </View>
