@@ -14,7 +14,7 @@ YellowBox.ignoreWarnings(["Setting a timer for a long period of time"]);
 const db = firebase.firestore();
 const chatsRef = db.collection("chats");
 
-export default function Chat({ route }) {
+export default function Chat({ route, navigation }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
@@ -115,9 +115,10 @@ export default function Chat({ route }) {
     const writes = messages.map((m) => chatsRef.add(m));
     await Promise.all(writes);
   }
-  const handleAvatar = (props) => {
-    console.log("props", props);
-  };
+  const handleAvatar = (props) =>
+    navigation.push("Profile", {
+      props: props,
+    });
 
   if (loading) {
     return (
@@ -136,6 +137,7 @@ export default function Chat({ route }) {
         renderUsernameOnMessage={true}
         onSend={handleSend}
         onPressAvatar={handleAvatar}
+        alwaysShowSend
       />
     </View>
   );

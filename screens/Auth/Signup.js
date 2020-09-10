@@ -93,7 +93,7 @@ class Signup extends Component {
               letterSpacing: 15,
             }}
           >
-            ORION
+            SIGNUP
           </Text>
           <Text
             style={{
@@ -103,9 +103,7 @@ class Signup extends Component {
               marginVertical: 2,
               letterSpacing: 5,
             }}
-          >
-            SIGNUP
-          </Text>
+          ></Text>
           <Input
             placeholder="Enter Your Display Name"
             handleChange={(name) => this.setState({ displayName: name })}

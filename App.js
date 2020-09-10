@@ -21,6 +21,11 @@ import Forum from "./screens/Forum/Forum";
 import Login from "./screens/Auth/Login";
 import Signup from "./screens/Auth/Signup";
 import Chat from "./screens/Forum/Chat";
+import Shop from "./screens/Shop/Shop";
+import Events from "./screens/Events/Events";
+import Courses from "./screens/Courses/Courses";
+import UserProfile from "./screens/Forum/UserProfile";
+
 const middlewares = [logger];
 const store = createStore(reducer, {}, applyMiddleware(...middlewares));
 
@@ -42,6 +47,10 @@ const HomeStackScreen = (props) => (
     <HomeStack.Screen name="Login" component={Login} />
     <HomeStack.Screen name="Signup" component={Signup} />
     <HomeStack.Screen name="Chat" component={Chat} />
+    <HomeStack.Screen name="Shop" component={Shop} />
+    <HomeStack.Screen name="Events" component={Events} />
+    <HomeStack.Screen name="Courses" component={Courses} />
+    <HomeStack.Screen name="Profile" component={UserProfile} />
   </HomeStack.Navigator>
 );
 

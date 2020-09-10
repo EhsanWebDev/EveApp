@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import Input from "../../components/input/input";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -53,6 +53,7 @@ class Login extends Component {
             backgroundColor: "#21202E",
           }}
         >
+          <StatusBar style="light" />
           <ActivityIndicator size="large" color="#56BCCB" />
         </View>
       );
@@ -65,6 +66,7 @@ class Login extends Component {
             backgroundColor: "#21202E",
           }}
         >
+          <StatusBar barStyle="light-content" />
           <Text
             style={{
               color: "#56BCCB",
@@ -101,7 +103,13 @@ class Login extends Component {
               {this.state.error}
             </Text>
           ) : null}
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              marginTop: 20,
+              alignItems: "center",
+            }}
+          >
             <TouchableOpacity
               onPress={this.handleCheck}
               style={{

@@ -35,6 +35,7 @@ const Home = ({ navigation }) => {
             alignItems: "center",
             backgroundColor: "transparent",
           }}
+          onPress={() => navigation.push("Courses")}
         >
           <LinearGradient
             // Button Linear Gradient
@@ -106,6 +107,7 @@ const Home = ({ navigation }) => {
             alignItems: "center",
             backgroundColor: "transparent",
           }}
+          onPress={() => navigation.push("Events")}
         >
           <LinearGradient
             // Button Linear Gradient
@@ -129,6 +131,7 @@ const Home = ({ navigation }) => {
             alignItems: "center",
             backgroundColor: "transparent",
           }}
+          onPress={() => navigation.push("Shop")}
         >
           <LinearGradient
             // Button Linear Gradient
