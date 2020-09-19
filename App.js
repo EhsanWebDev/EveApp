@@ -39,7 +39,12 @@ const EveStack = createStackNavigator();
 const CourseStack = createStackNavigator();
 
 const AuthStack = createStackNavigator();
-import { Ionicons, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
+import {
+  Ionicons,
+  MaterialIcons,
+  FontAwesome5,
+  SimpleLineIcons,
+} from "@expo/vector-icons";
 YellowBox.ignoreWarnings([
   "Setting a timer",
   "Non-serializable values were found in the navigation state",
@@ -65,7 +70,7 @@ function MyTabs() {
       <Tab.Screen
         name="Eve"
         options={{
-          tabBarColor: "#B53471",
+          tabBarColor: "#9A1458",
           tabBarBadge: true,
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="event-available" size={28} color={color} />
@@ -90,7 +95,7 @@ function MyTabs() {
           tabBarColor: "#1289A7",
           // tabBarBadge: true,
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="forum" size={28} color={color} />
+            <SimpleLineIcons name="user" size={24} color={color} />
           ),
         }}
         component={ForumStackScreen}
@@ -186,7 +191,9 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <PaperProvider>
-          {user !== null ? <MyTabs /> : <AuthStackScreen />}
+          <View style={{ flex: 1 }}>
+            {user !== null ? <MyTabs /> : <AuthStackScreen />}
+          </View>
         </PaperProvider>
         <FlashMessage position="top" />
       </NavigationContainer>

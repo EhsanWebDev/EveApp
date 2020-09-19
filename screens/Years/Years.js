@@ -1,6 +1,6 @@
 import React from "react";
 import { View, SafeAreaView, StyleSheet, Dimensions } from "react-native";
-import { Title, Button } from "react-native-paper";
+import { Title, Button, Appbar } from "react-native-paper";
 import Cons from "expo-constants";
 // import { Container } from './styles';
 
@@ -11,7 +11,10 @@ const Years = ({ navigation }) => {
   //   console.log(year + "-" + "01" + "-" + day);
   return (
     <View style={styles.container}>
-      <Title style={{ textAlign: "center", fontSize: 24 }}>
+      <Appbar.Header style={{ backgroundColor: "#9A1458" }}>
+        <Appbar.Content title="Bridget Marie" subtitle="Eve Planner" />
+      </Appbar.Header>
+      <Title style={{ textAlign: "center", marginTop: 20, fontSize: 24 }}>
         Months of the year
       </Title>
       <View style={styles.year_container}>
@@ -162,7 +165,7 @@ const Years = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Cons.statusBarHeight + 20,
+    // marginTop: Cons.statusBarHeight + 20,
   },
   year_container: {
     marginTop: 20,

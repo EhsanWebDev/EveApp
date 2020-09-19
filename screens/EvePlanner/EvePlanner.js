@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   TextInput,
   Button,
+  Appbar,
 } from "react-native-paper";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import Constants from "expo-constants";
@@ -23,10 +24,15 @@ class EvePlanner extends React.Component {
     marked_dates: [],
 
     union: "",
+    unionVal: false,
     confidence: "",
+    confidenceVal: false,
     diet: "",
+    dietVal: false,
     rhythm: "",
+    rhythmVal: false,
     influence: "",
+    influenceVal: false,
 
     five_to_six: "",
     six_to_seven: "",
@@ -46,143 +52,172 @@ class EvePlanner extends React.Component {
   };
 
   handleUnionChange = async () => {
-    const { union, month } = this.state;
-    try {
-      await AsyncStorage.setItem(`${month}_union`, union);
-      showMessage({
-        message: "Changes Saved ...!",
-        floating: true,
-        position: "top",
-        icon: "success",
-        type: "success",
-        animationDuration: 350,
-        duration: 1200,
-        titleStyle: { fontSize: 16, fontWeight: "bold" },
-      });
-    } catch (error) {
-      console.log(error);
-      showMessage({
-        message: "Error Occurred...!",
-        floating: true,
-        position: "top",
-        icon: "danger",
-        type: "danger",
-        animationDuration: 350,
-        duration: 1200,
-        titleStyle: { fontSize: 16, fontWeight: "bold" },
-      });
+    const { union, unionVal, month } = this.state;
+    if (unionVal) {
+      this.setState({ unionVal: false });
+    } else {
+      try {
+        this.setState({ unionVal: true });
+        await AsyncStorage.setItem(`${month}_union`, union);
+        showMessage({
+          message: "Changes Saved ...!",
+          floating: true,
+          position: "top",
+          icon: "success",
+          type: "success",
+          animationDuration: 350,
+          duration: 1200,
+          titleStyle: { fontSize: 16, fontWeight: "bold" },
+        });
+      } catch (error) {
+        console.log(error);
+        showMessage({
+          message: "Error Occurred...!",
+          floating: true,
+          position: "top",
+          icon: "danger",
+          type: "danger",
+          animationDuration: 350,
+          duration: 1200,
+          titleStyle: { fontSize: 16, fontWeight: "bold" },
+        });
+      }
     }
   };
   handleConfidenceChange = async () => {
-    const { confidence, month } = this.state;
-    try {
-      await AsyncStorage.setItem(`${month}_confidence`, confidence);
-      showMessage({
-        message: "Changes Saved ...!",
-        floating: true,
-        position: "top",
-        icon: "success",
-        type: "success",
-        animationDuration: 350,
-        duration: 1200,
-        titleStyle: { fontSize: 16, fontWeight: "bold" },
+    const { confidence, month, confidenceVal } = this.state;
+    if (confidenceVal) {
+      this.setState({
+        confidenceVal: false,
       });
-    } catch (error) {
-      console.log(error);
-      showMessage({
-        message: "Error Occurred...!",
-        floating: true,
-        position: "top",
-        icon: "danger",
-        type: "danger",
-        animationDuration: 350,
-        duration: 1200,
-        titleStyle: { fontSize: 16, fontWeight: "bold" },
-      });
+    } else {
+      try {
+        this.setState({
+          confidenceVal: true,
+        });
+        await AsyncStorage.setItem(`${month}_confidence`, confidence);
+        showMessage({
+          message: "Changes Saved ...!",
+          floating: true,
+          position: "top",
+          icon: "success",
+          type: "success",
+          animationDuration: 350,
+          duration: 1200,
+          titleStyle: { fontSize: 16, fontWeight: "bold" },
+        });
+      } catch (error) {
+        console.log(error);
+        showMessage({
+          message: "Error Occurred...!",
+          floating: true,
+          position: "top",
+          icon: "danger",
+          type: "danger",
+          animationDuration: 350,
+          duration: 1200,
+          titleStyle: { fontSize: 16, fontWeight: "bold" },
+        });
+      }
     }
   };
   handleDietChange = async () => {
-    const { diet, month } = this.state;
-    try {
-      await AsyncStorage.setItem(`${month}_diet`, diet);
-      showMessage({
-        message: "Changes Saved ...!",
-        floating: true,
-        position: "top",
-        icon: "success",
-        type: "success",
-        animationDuration: 350,
-        duration: 1200,
-        titleStyle: { fontSize: 16, fontWeight: "bold" },
-      });
-    } catch (error) {
-      console.log(error);
-      showMessage({
-        message: "Error Occurred...!",
-        floating: true,
-        position: "top",
-        icon: "danger",
-        type: "danger",
-        animationDuration: 350,
-        duration: 1200,
-        titleStyle: { fontSize: 16, fontWeight: "bold" },
-      });
+    const { diet, dietVal, month } = this.state;
+    if (dietVal) {
+      this.setState({ dietVal: false });
+    } else {
+      try {
+        this.setState({ dietVal: true });
+        await AsyncStorage.setItem(`${month}_diet`, diet);
+        showMessage({
+          message: "Changes Saved ...!",
+          floating: true,
+          position: "top",
+          icon: "success",
+          type: "success",
+          animationDuration: 350,
+          duration: 1200,
+          titleStyle: { fontSize: 16, fontWeight: "bold" },
+        });
+      } catch (error) {
+        console.log(error);
+        showMessage({
+          message: "Error Occurred...!",
+          floating: true,
+          position: "top",
+          icon: "danger",
+          type: "danger",
+          animationDuration: 350,
+          duration: 1200,
+          titleStyle: { fontSize: 16, fontWeight: "bold" },
+        });
+      }
     }
   };
   handleRhythmChange = async () => {
-    const { rhythm, month } = this.state;
-    try {
-      await AsyncStorage.setItem(`${month}_rhythm`, rhythm);
-      showMessage({
-        message: "Changes Saved ...!",
-        floating: true,
-        position: "top",
-        icon: "success",
-        type: "success",
-        animationDuration: 350,
-        duration: 1200,
-        titleStyle: { fontSize: 16, fontWeight: "bold" },
-      });
-    } catch (error) {
-      console.log(error);
-      showMessage({
-        message: "Error Occurred...!",
-        floating: true,
-        position: "top",
-        icon: "danger",
-        type: "danger",
-        animationDuration: 350,
-        duration: 1200,
-        titleStyle: { fontSize: 16, fontWeight: "bold" },
-      });
+    const { rhythm, rhythmVal, month } = this.state;
+    if (rhythmVal) {
+      this.setState({ rhythmVal: false });
+    } else {
+      try {
+        this.setState({ rhythmVal: true });
+        await AsyncStorage.setItem(`${month}_rhythm`, rhythm);
+        showMessage({
+          message: "Changes Saved ...!",
+          floating: true,
+          position: "top",
+          icon: "success",
+          type: "success",
+          animationDuration: 350,
+          duration: 1200,
+          titleStyle: { fontSize: 16, fontWeight: "bold" },
+        });
+      } catch (error) {
+        console.log(error);
+        showMessage({
+          message: "Error Occurred...!",
+          floating: true,
+          position: "top",
+          icon: "danger",
+          type: "danger",
+          animationDuration: 350,
+          duration: 1200,
+          titleStyle: { fontSize: 16, fontWeight: "bold" },
+        });
+      }
     }
   };
   handleInfluenceChange = async () => {
-    const { influence, month } = this.state;
-    try {
-      await AsyncStorage.setItem(`${month}_influence`, influence);
-      showMessage({
-        message: "Changes Saved...!",
-        floating: true,
-        position: "top",
-        icon: "success",
-        type: "success",
-        animationDuration: 350,
-        duration: 1200,
-        titleStyle: { fontSize: 16, fontWeight: "bold" },
-      });
-    } catch (error) {
-      console.log(error);
-      showMessage({
-        message: "Error Occurred...!",
-        floating: true,
-        position: "top",
-        icon: "danger",
-        type: "danger",
-        animationDuration: 350,
-        duration: 1200,
-        titleStyle: { fontSize: 16, fontWeight: "bold" },
-      });
+    const { influence, influenceVal, month } = this.state;
+    if (influenceVal) {
+      this.setState({ influenceVal: false });
+    } else {
+      try {
+        this.setState({ influenceVal: true });
+        await AsyncStorage.setItem(`${month}_influence`, influence);
+        showMessage({
+          message: "Changes Saved...!",
+          floating: true,
+          position: "top",
+          icon: "success",
+          type: "success",
+          animationDuration: 350,
+          duration: 1200,
+          titleStyle: { fontSize: 16, fontWeight: "bold" },
+        });
+      } catch (error) {
+        console.log(error);
+        showMessage({
+          message: "Error Occurred...!",
+          floating: true,
+          position: "top",
+          icon: "danger",
+          type: "danger",
+          animationDuration: 350,
+          duration: 1200,
+          titleStyle: { fontSize: 16, fontWeight: "bold" },
+        });
+      }
     }
   };
   async componentDidMount() {
@@ -239,7 +274,7 @@ class EvePlanner extends React.Component {
 
           let markedDates = await AsyncStorage.getItem("marked_dates");
 
-          console.log("marked_datssss => ", markedDates);
+          // console.log("marked_datssss => ", markedDates);
           let influence = await AsyncStorage.getItem(
             `${this.state.month}_influence`
           );
@@ -258,6 +293,21 @@ class EvePlanner extends React.Component {
               marked: obj,
             });
           }
+          if (union !== null) {
+            this.setState({ unionVal: true });
+          }
+          if (confidence !== null) {
+            this.setState({ confidenceVal: true });
+          }
+          if (rhythm !== null) {
+            this.setState({ rhythmVal: true });
+          }
+          if (diet !== null) {
+            this.setState({ dietVal: true });
+          }
+          if (influence !== null) {
+            this.setState({ influenceVal: true });
+          }
           this.setState({
             union,
             confidence,
@@ -266,7 +316,7 @@ class EvePlanner extends React.Component {
             influence,
             loading: false,
           });
-          console.log(union, confidence);
+          // console.log(union, confidence);
         } catch (error) {
           console.log(error);
         }
@@ -347,6 +397,11 @@ class EvePlanner extends React.Component {
   render() {
     const {
       union,
+      unionVal,
+      confidenceVal,
+      dietVal,
+      influenceVal,
+      rhythmVal,
       date,
       loading,
       confidence,
@@ -354,7 +409,7 @@ class EvePlanner extends React.Component {
       influence,
       diet,
       marked_dates,
-
+      month,
       five_to_six,
       six_to_seven,
       seven_to_eight,
@@ -378,9 +433,12 @@ class EvePlanner extends React.Component {
           style={{
             flex: 1,
             backgroundColor: "white",
-            marginTop: Constants.statusBarHeight,
+            // marginTop: Constants.statusBarHeight,
           }}
         >
+          <Appbar.Header style={{ backgroundColor: "#9A1458" }}>
+            <Appbar.Content title="Bridget Marie" subtitle={month} />
+          </Appbar.Header>
           {/* My Monthly Goals */}
           <List.Accordion title="My Monthly Goals" id="1">
             <View
@@ -412,20 +470,26 @@ class EvePlanner extends React.Component {
                     vision for my family & career at this time?
                   </Text>
                   <TextInput
-                    mode="outlined"
-                    label="Enter your text"
+                    // mode="outlined"
+                    label={unionVal ? "" : "Enter your text"}
                     value={union}
+                    disabled={unionVal ? true : false}
                     multiline
-                    numberOfLines={4}
-                    style={{ marginTop: 10 }}
+                    numberOfLines={3}
+                    style={styles.goalsInput}
                     onChangeText={(union) => this.setState({ union })}
                   />
                   <Button
                     mode="contained"
-                    style={{ marginTop: 10 }}
+                    style={[
+                      styles.goalsBtn,
+                      {
+                        backgroundColor: unionVal ? "#f39c12" : "#9A1458",
+                      },
+                    ]}
                     onPress={() => this.handleUnionChange()}
                   >
-                    Save
+                    {unionVal ? "Edit" : "Save"}
                   </Button>
                 </View>
               </List.Accordion>
@@ -452,20 +516,25 @@ class EvePlanner extends React.Component {
                     goals for this month?
                   </Text>
                   <TextInput
-                    mode="outlined"
-                    label="Enter your text"
+                    // mode="outlined"
+                    label={confidenceVal ? "" : "Enter your text"}
                     value={confidence}
                     multiline
-                    numberOfLines={4}
-                    style={{ marginTop: 10 }}
+                    numberOfLines={3}
+                    style={styles.goalsInput}
                     onChangeText={(confidence) => this.setState({ confidence })}
                   />
                   <Button
                     mode="contained"
-                    style={{ marginTop: 10 }}
+                    style={[
+                      styles.goalsBtn,
+                      {
+                        backgroundColor: confidenceVal ? "#f39c12" : "#9A1458",
+                      },
+                    ]}
                     onPress={() => this.handleConfidenceChange()}
                   >
-                    Save
+                    {confidenceVal ? "Edit" : "save"}
                   </Button>
                 </View>
               </List.Accordion>
@@ -492,20 +561,25 @@ class EvePlanner extends React.Component {
                     diet this month?
                   </Text>
                   <TextInput
-                    mode="outlined"
-                    label="Enter your text"
+                    // mode="outlined"
+                    label={dietVal ? "" : "Enter your text"}
                     value={diet}
                     multiline
-                    numberOfLines={4}
-                    style={{ marginTop: 10 }}
+                    numberOfLines={3}
+                    style={styles.goalsInput}
                     onChangeText={(diet) => this.setState({ diet })}
                   />
                   <Button
                     mode="contained"
-                    style={{ marginTop: 10 }}
+                    style={[
+                      styles.goalsBtn,
+                      {
+                        backgroundColor: dietVal ? "#f39c12" : "#9A1458",
+                      },
+                    ]}
                     onPress={() => this.handleDietChange()}
                   >
-                    Save
+                    {dietVal ? "Edit" : "save"}
                   </Button>
                 </View>
               </List.Accordion>
@@ -532,20 +606,25 @@ class EvePlanner extends React.Component {
                     month?
                   </Text>
                   <TextInput
-                    mode="outlined"
-                    label="Enter your text"
+                    // mode="outlined"
+                    label={rhythmVal ? "" : "Enter your text"}
                     value={rhythm}
                     multiline
-                    numberOfLines={4}
-                    style={{ marginTop: 10 }}
+                    numberOfLines={3}
+                    style={styles.goalsInput}
                     onChangeText={(rhythm) => this.setState({ rhythm })}
                   />
                   <Button
                     mode="contained"
-                    style={{ marginTop: 10 }}
+                    style={[
+                      styles.goalsBtn,
+                      {
+                        backgroundColor: rhythmVal ? "#f39c12" : "#9A1458",
+                      },
+                    ]}
                     onPress={() => this.handleRhythmChange()}
                   >
-                    Save
+                    {rhythmVal ? "Edit" : "save"}
                   </Button>
                 </View>
               </List.Accordion>
@@ -572,20 +651,25 @@ class EvePlanner extends React.Component {
                     month?
                   </Text>
                   <TextInput
-                    mode="outlined"
-                    label="Enter your text"
+                    // mode="outlined"
+                    label={influenceVal ? "" : "Enter your text"}
                     value={influence}
                     multiline
-                    numberOfLines={4}
-                    style={{ marginTop: 10 }}
+                    numberOfLines={3}
+                    style={styles.goalsInput}
                     onChangeText={(influence) => this.setState({ influence })}
                   />
                   <Button
                     mode="contained"
-                    style={{ marginTop: 10 }}
+                    style={[
+                      styles.goalsBtn,
+                      {
+                        backgroundColor: influenceVal ? "#f39c12" : "#9A1458",
+                      },
+                    ]}
                     onPress={() => this.handleInfluenceChange()}
                   >
-                    Save
+                    {influenceVal ? "Edit" : "save"}
                   </Button>
                 </View>
               </List.Accordion>
@@ -795,7 +879,7 @@ class EvePlanner extends React.Component {
               this.props.navigation.navigate("Notes", {
                 day,
                 marked: (data) => {
-                  console.log("date", date);
+                  // console.log("date", date);
                   this.setState({ marked: { ...this.state.marked, ...data } });
                 },
               });
@@ -918,6 +1002,16 @@ const styles = StyleSheet.create({
     // paddingVertical: 5,
     textAlignVertical: "center",
     height: 45,
+  },
+  goalsInput: {
+    marginTop: 16,
+    fontSize: 18,
+    backgroundColor: "white",
+  },
+  goalsBtn: {
+    marginTop: 10,
+    marginHorizontal: 20,
+    borderRadius: 8,
   },
   input: {
     // paddingVertical: 1,

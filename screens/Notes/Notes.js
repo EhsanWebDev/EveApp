@@ -241,13 +241,13 @@ class Notes extends React.Component {
             style={{
               flex: 1,
               justifyContent: "flex-end",
-              marginTop: 40,
+              marginTop: 10,
               marginHorizontal: 20,
             }}
           >
             <Button
               mode="contained"
-              style={{ borderRadius: 8, backgroundColor: "#c44569" }}
+              style={{ borderRadius: 8, backgroundColor: "#9A1458" }}
               onPress={() => this.handleNotesChange()}
             >
               Save
