@@ -13,7 +13,7 @@ export default class Events extends React.Component {
           </View>
         )}
         source={{ uri: "https://bridgetmariecentre.org/events/" }}
-        style={{ flex: 1, marginTop: Cons.statusBarHeight }}
+        style={{ flex: 1 }}
       />
     );
   }

@@ -13,7 +13,7 @@ export default class Shop extends React.Component {
           </View>
         )}
         source={{ uri: "https://bridgetmariecentre.org/shop/" }}
-        style={{ flex: 1, marginTop: Cons.statusBarHeight }}
+        style={{ flex: 1 }}
       />
     );
   }

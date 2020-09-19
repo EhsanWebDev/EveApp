@@ -58,6 +58,7 @@ export default class Forum extends Component {
     this.unsubscribeFromAuth();
   }
   render() {
+    const { navigation } = this.props;
     if (this.state.loading) {
       return (
         <View
@@ -173,32 +174,24 @@ export default class Forum extends Component {
               {/* <Text style={styles.menuItemText}>Payment</Text>
                 </View>
               </TouchableRipple> */}
-              <TouchableRipple>
+              <TouchableRipple onPress={() => navigation.push("Events")}>
                 <View style={styles.menuItem}>
-                  <MaterialCommunityIcons
-                    name="share-outline"
-                    color="#777"
-                    size={25}
-                  />
-                  <Text style={styles.menuItemText}>Tell Your Friends</Text>
+                  <MaterialIcons name="event" color="#777" size={25} />
+                  <Text style={styles.menuItemText}>Events</Text>
                 </View>
               </TouchableRipple>
-              <TouchableRipple onPress={() => {}}>
+              <TouchableRipple onPress={() => navigation.push("Contact")}>
                 <View style={styles.menuItem}>
-                  <MaterialCommunityIcons
-                    name="account-check-outline"
-                    color="#777"
-                    size={25}
-                  />
-                  <Text style={styles.menuItemText}>Support</Text>
+                  <MaterialIcons name="contact-mail" color="#777" size={25} />
+                  <Text style={styles.menuItemText}>Contact Us</Text>
                 </View>
               </TouchableRipple>
-              <TouchableRipple onPress={() => {}}>
+              {/* <TouchableRipple onPress={() => {}}>
                 <View style={styles.menuItem}>
                   <MaterialIcons name="settings" color="#777777" size={25} />
                   <Text style={styles.menuItemText}>Settings</Text>
                 </View>
-              </TouchableRipple>
+              </TouchableRipple> */}
             </View>
           </SafeAreaView>
           <View

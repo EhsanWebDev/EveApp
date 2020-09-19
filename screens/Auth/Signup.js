@@ -38,9 +38,9 @@ class Signup extends Component {
       password: "",
       error: false,
     });
-    this.props.navigation.navigate("Forum", {
-      uid: user.uid,
-    });
+    // this.props.navigation.navigate("Forum", {
+    //   uid: user.uid,
+    // });
 
     // firebase
     //   .auth()

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Image,
@@ -7,173 +7,93 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { Card, Button, Title, Paragraph } from "react-native-paper";
+import {
+  Card,
+  Button,
+  Title,
+  Paragraph,
+  Appbar,
+  ActivityIndicator,
+  Avatar,
+} from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { connect } from "react-redux";
+import { auth } from "firebase";
+import firebase from "firebase";
+import { createUserProfileDocument } from "../../Firebase";
 
 const { width, height } = Dimensions.get("screen");
 const Home = ({ navigation }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log(user);
+    let subscriber = "";
+    const userFunc = async () => {
+      subscriber = firebase.auth().onAuthStateChanged(async (user) => {
+        if (user) {
+          const userRef = await createUserProfileDocument(user);
+
+          // // console.log("user", user);
+          userRef.onSnapshot((snap) => {
+            setUser({
+              id: snap.id,
+              ...snap.data(),
+            });
+
+            setLoading(false);
+          });
+        } else {
+          //
+        }
+      });
+    };
+    userFunc();
+    console.log(user);
+
+    return subscriber; // unsubscribe on unmount
+  }, []);
+  if (loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          backgroundColor: "#21202E",
+        }}
+      >
+        <ActivityIndicator size="large" color="#56BCCB" />
+      </View>
+    );
+  }
   return (
     <View
       style={{
         flex: 1,
         backgroundColor: "white",
-        justifyContent: "space-around",
+        // justifyContent: "space-around",
       }}
     >
+      <Appbar.Header style={{ backgroundColor: "#9A1458" }}>
+        <Appbar.Content
+          title="Bridget Marie"
+          subtitle={`Welcome ${user && user.displayName}`}
+        />
+        <Avatar.Text
+          size={50}
+          style={{ backgroundColor: "#9A1458" }}
+          label={user.displayName.slice(0, 1)}
+        />
+      </Appbar.Header>
       <Image
         source={{
           uri:
             "https://bridgetmariecentre.org/wp-content/uploads/2020/07/BM-Logo-without-white-JPG-1-scaled.jpg",
         }}
-        style={{ width: width, height: width / 3, resizeMode: "contain" }}
+        style={{ width: width, height: width / 2.5, resizeMode: "contain" }}
       />
-      <View style={styles.cardContainer}>
-        <TouchableOpacity
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "transparent",
-          }}
-          onPress={() => navigation.push("Courses")}
-        >
-          <LinearGradient
-            // Button Linear Gradient
-            colors={["#c44569", "#c44569"]}
-            style={styles.card}
-          >
-            <Title
-              style={{
-                color: "white",
-
-                textAlign: "center",
-              }}
-            >
-              Courses
-            </Title>
-          </LinearGradient>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "transparent",
-          }}
-          onPress={() => navigation.push("Forum")}
-        >
-          <LinearGradient
-            // Button Linear Gradient
-            colors={["#c44569", "#c44569"]}
-            style={styles.card}
-          >
-            <Title
-              style={{
-                color: "white",
-
-                textAlign: "center",
-              }}
-            >
-              Forum
-            </Title>
-          </LinearGradient>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "transparent",
-          }}
-          onPress={() => navigation.push("Years")}
-        >
-          <LinearGradient
-            // Button Linear Gradient
-            colors={["#c44569", "#c44569"]}
-            style={styles.card}
-          >
-            <Title
-              style={{
-                color: "white",
-
-                textAlign: "center",
-              }}
-            >
-              The New Eve Planner
-            </Title>
-          </LinearGradient>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "transparent",
-          }}
-          onPress={() => navigation.push("Events")}
-        >
-          <LinearGradient
-            // Button Linear Gradient
-            colors={["#c44569", "#c44569"]}
-            style={styles.card}
-          >
-            <Title
-              style={{
-                color: "white",
-
-                textAlign: "center",
-              }}
-            >
-              Events
-            </Title>
-          </LinearGradient>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "transparent",
-          }}
-          onPress={() => navigation.push("Shop")}
-        >
-          <LinearGradient
-            // Button Linear Gradient
-            colors={["#c44569", "#c44569"]}
-            style={styles.card}
-          >
-            <Title
-              style={{
-                color: "white",
-
-                textAlign: "center",
-              }}
-            >
-              Shop
-            </Title>
-          </LinearGradient>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "transparent",
-          }}
-          onPress={() => navigation.push("Contact")}
-        >
-          <LinearGradient
-            // Button Linear Gradient
-            colors={["#c44569", "#c44569"]}
-            style={styles.card}
-          >
-            <Title
-              style={{
-                color: "white",
-
-                textAlign: "center",
-              }}
-            >
-              Contact Us
-            </Title>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
+      <View style={styles.cardContainer}></View>
     </View>
   );
 };
