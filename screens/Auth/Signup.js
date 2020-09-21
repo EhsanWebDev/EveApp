@@ -27,17 +27,23 @@ class Signup extends Component {
   signup = async () => {
     this.setState({ loading: true });
     const { email, password, displayName } = this.state;
-    const { user } = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
-    createUserProfileDocument(user, { displayName });
+    if (displayName.length <= 0) {
+      alert("please enter display name");
+      this.setState({ loading: false });
+      return;
+    } else {
+      const { user } = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      await createUserProfileDocument(user, displayName);
+      this.setState({
+        loading: false,
+        email: "",
+        password: "",
+        error: false,
+      });
+    }
 
-    this.setState({
-      loading: false,
-      email: "",
-      password: "",
-      error: false,
-    });
     // this.props.navigation.navigate("Forum", {
     //   uid: user.uid,
     // });

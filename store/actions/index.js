@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   LOGIN_USER_START,
   LOGIN_USER_FAILURE,
@@ -14,7 +13,7 @@ export function loading() {
   };
 }
 export function loginUserSuccess(data) {
-  return function (dispatch) {
+  return (dispatch) => {
     //
     dispatch({ type: LOGIN_USER_SUCCESS, payload: data });
   };
@@ -31,9 +30,7 @@ export function loginUserData(data) {
 }
 
 export function logout() {
-  return function (dispatch) {
-    dispatch({ type: LOGIN_USER_START });
-
-    dispatch({ type: LOGOUT });
+  return {
+    type: "logout",
   };
 }

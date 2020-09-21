@@ -7,9 +7,7 @@ import {
 } from "../actions/types";
 
 let initial_state = {
-  data: {
-    user: null,
-  },
+  user: null,
   isLoading: false,
   error: false,
 };
@@ -25,7 +23,7 @@ export default (state = initial_state, action) => {
     case LOGIN_USER_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        user: action.payload,
         isLoading: false,
         error: false,
       };
@@ -43,14 +41,10 @@ export default (state = initial_state, action) => {
         data: action.payload,
         error: false,
       };
-    case LOGOUT:
+    case "logout":
       return {
         ...state,
-        isLoading: false,
-        data: {
-          user: null,
-        },
-        error: false,
+        user: null,
       };
     default:
       return state;

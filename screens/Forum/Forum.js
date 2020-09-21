@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View, SafeAreaView, StyleSheet } from "react-native";
 import firebase from "firebase";
-import Login from "../Auth/Login";
 import {
   Title,
   Button,
@@ -21,7 +20,9 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-export default class Forum extends Component {
+import { connect } from "react-redux";
+import { logout } from "../../store/actions";
+class Forum extends Component {
   state = {
     user: null,
     loading: true,
@@ -57,6 +58,10 @@ export default class Forum extends Component {
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
+  handleLogout = async () => {
+    await firebase.auth().signOut();
+    this.props.dispatch(logout());
+  };
   render() {
     const { navigation } = this.props;
     if (this.state.loading) {
@@ -71,71 +76,67 @@ export default class Forum extends Component {
           <ActivityIndicator size="large" color="#56BCCB" />
         </View>
       );
-    } else if (!this.state.user) {
-      return <Login navigation={this.props.navigation} />;
-    } else {
-      return (
-        <View style={{ flex: 1, marginTop: cons.statusBarHeight }}>
-          <SafeAreaView style={styles.container}>
-            <View style={styles.userInfoSection}>
-              <View style={{ flexDirection: "row", marginTop: 15 }}>
-                <Avatar.Image
-                  source={{
-                    uri:
-                      "https://api.adorable.io/avatars/80/abott@adorable.png",
-                  }}
-                  size={80}
-                />
-                <View style={{ marginLeft: 20 }}>
-                  <Title
-                    style={[
-                      styles.title,
-                      {
-                        marginTop: 15,
-                        marginBottom: 5,
-                      },
-                    ]}
-                  >
-                    {this.state.user.displayName}
-                  </Title>
-                  <View
-                    style={{ flexDirection: "row", alignItems: "baseline" }}
-                  >
-                    <Badge
-                      size={14}
-                      style={{
-                        backgroundColor: "green",
-                        marginRight: 5,
-                        marginBottom: 3,
-                      }}
-                    ></Badge>
-                    <Caption style={styles.caption}>online</Caption>
-                  </View>
+    }
+
+    return (
+      <View style={{ flex: 1, marginTop: cons.statusBarHeight }}>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.userInfoSection}>
+            <View style={{ flexDirection: "row", marginTop: 15 }}>
+              <Avatar.Image
+                source={{
+                  uri: "https://api.adorable.io/avatars/80/abott@adorable.png",
+                }}
+                size={80}
+              />
+              <View style={{ marginLeft: 20 }}>
+                <Title
+                  style={[
+                    styles.title,
+                    {
+                      marginTop: 15,
+                      marginBottom: 5,
+                    },
+                  ]}
+                >
+                  {this.state.user && this.state.user.displayName}
+                </Title>
+                <View style={{ flexDirection: "row", alignItems: "baseline" }}>
+                  <Badge
+                    size={14}
+                    style={{
+                      backgroundColor: "green",
+                      marginRight: 5,
+                      marginBottom: 3,
+                    }}
+                  ></Badge>
+                  <Caption style={styles.caption}>online</Caption>
                 </View>
               </View>
             </View>
+          </View>
 
-            <View style={styles.userInfoSection}>
-              {/* <View style={styles.row}> */}
-              {/* <Icon name="map-marker-radius" color="#777777" size={20} /> */}
-              {/* <Text style={{ color: "#777777", marginLeft: 20 }}>
+          <View style={styles.userInfoSection}>
+            {/* <View style={styles.row}> */}
+            {/* <Icon name="map-marker-radius" color="#777777" size={20} /> */}
+            {/* <Text style={{ color: "#777777", marginLeft: 20 }}>
                   Kolkata, India
                 </Text>
               </View>
               <View style={styles.row}> */}
-              {/* <Icon name="phone" color="#777777" size={20} /> */}
-              {/* <Text style={{ color: "#777777", marginLeft: 20 }}>
+            {/* <Icon name="phone" color="#777777" size={20} /> */}
+            {/* <Text style={{ color: "#777777", marginLeft: 20 }}>
                   +91-900000009
                 </Text>
               </View> */}
-              <View style={styles.row}>
-                <MaterialIcons name="email" color="#777777" size={20} />
-                <Text style={{ color: "#777777", marginLeft: 20 }}>
-                  {this.state.user.email}
-                </Text>
-              </View>
+            <View style={styles.row}>
+              <MaterialIcons name="email" color="#777777" size={20} />
+              <Text style={{ color: "#777777", marginLeft: 20 }}>
+                {this.state.user && this.state.user.email}
+              </Text>
             </View>
-            {/* 
+          </View>
+          {/* 
             <View style={styles.infoBoxWrapper}>
               <View
                 style={[
@@ -155,72 +156,69 @@ export default class Forum extends Component {
               </View>
             </View> */}
 
-            <View style={styles.menuWrapper}>
-              <TouchableRipple
-                onPress={() =>
-                  this.props.navigation.push("Chat", {
-                    user: this.state.user,
-                  })
-                }
-              >
-                <View style={styles.menuItem}>
-                  <Ionicons name="ios-chatboxes" color="#777" size={25} />
-                  <Text style={styles.menuItemText}>Forum Chat</Text>
-                </View>
-              </TouchableRipple>
-              {/* <TouchableRipple onPress={() => {}}>
+          <View style={styles.menuWrapper}>
+            <TouchableRipple
+              onPress={() =>
+                this.props.navigation.push("Chat", {
+                  user: this.state.user,
+                })
+              }
+            >
+              <View style={styles.menuItem}>
+                <Ionicons name="ios-chatboxes" color="#777" size={25} />
+                <Text style={styles.menuItemText}>Forum Chat</Text>
+              </View>
+            </TouchableRipple>
+            {/* <TouchableRipple onPress={() => {}}>
                 <View style={styles.menuItem}> */}
-              {/* <Icon name="credit-card" color="#FF6347" size={25} /> */}
-              {/* <Text style={styles.menuItemText}>Payment</Text>
+            {/* <Icon name="credit-card" color="#FF6347" size={25} /> */}
+            {/* <Text style={styles.menuItemText}>Payment</Text>
                 </View>
               </TouchableRipple> */}
-              <TouchableRipple onPress={() => navigation.push("Events")}>
-                <View style={styles.menuItem}>
-                  <MaterialIcons name="event" color="#777" size={25} />
-                  <Text style={styles.menuItemText}>Events</Text>
-                </View>
-              </TouchableRipple>
-              <TouchableRipple onPress={() => navigation.push("Contact")}>
-                <View style={styles.menuItem}>
-                  <MaterialIcons name="contact-mail" color="#777" size={25} />
-                  <Text style={styles.menuItemText}>Contact Us</Text>
-                </View>
-              </TouchableRipple>
-              {/* <TouchableRipple onPress={() => {}}>
+            <TouchableRipple onPress={() => navigation.push("Events")}>
+              <View style={styles.menuItem}>
+                <MaterialIcons name="event" color="#777" size={25} />
+                <Text style={styles.menuItemText}>Events</Text>
+              </View>
+            </TouchableRipple>
+            <TouchableRipple onPress={() => navigation.push("Contact")}>
+              <View style={styles.menuItem}>
+                <MaterialIcons name="contact-mail" color="#777" size={25} />
+                <Text style={styles.menuItemText}>Contact Us</Text>
+              </View>
+            </TouchableRipple>
+            {/* <TouchableRipple onPress={() => {}}>
                 <View style={styles.menuItem}>
                   <MaterialIcons name="settings" color="#777777" size={25} />
                   <Text style={styles.menuItemText}>Settings</Text>
                 </View>
               </TouchableRipple> */}
-            </View>
-          </SafeAreaView>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "flex-end",
-              marginBottom: 20,
-              marginHorizontal: 20,
-            }}
-          >
-            <Button
-              mode="contained"
-              style={{ backgroundColor: "#c44569" }}
-              onPress={() => firebase.auth().signOut()}
-            >
-              Sign Out
-            </Button>
           </View>
+        </SafeAreaView>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "flex-end",
+            marginBottom: 20,
+            marginHorizontal: 20,
+          }}
+        >
+          <Button
+            mode="contained"
+            style={{ backgroundColor: "#c44569" }}
+            onPress={() => this.handleLogout()}
+          >
+            Sign Out
+          </Button>
         </View>
-      );
-    }
+      </View>
+    );
   }
-
-  // return (
-  //   <View>
-  //     <Text> textInComponent </Text>
-  //   </View>
-  // );
 }
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+});
+export default connect(null, mapDispatchToProps)(Forum);
 
 const styles = StyleSheet.create({
   container: {
