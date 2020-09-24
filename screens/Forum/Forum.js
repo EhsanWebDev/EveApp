@@ -18,10 +18,12 @@ import { LinearGradient } from "expo-linear-gradient";
 import {
   Ionicons,
   MaterialIcons,
+  Feather,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { logout } from "../../store/actions";
+import { SIGNOUT } from "../../store/actions/auth";
 class Forum extends Component {
   state = {
     user: null,
@@ -29,38 +31,39 @@ class Forum extends Component {
   };
   unsubscribeFromAuth = null;
   componentDidMount() {
-    this.unsubscribeFromAuth = firebase
-      .auth()
-      .onAuthStateChanged(async (user) => {
-        if (user) {
-          console.log(user.displayName);
+    if (this.props.user) {
+      this.setState({ loading: false, user: this.props.user });
+    }
+    // this.unsubscribeFromAuth = firebase
+    //   .auth()
+    //   .onAuthStateChanged(async (user) => {
+    //     if (user) {
+    //       console.log(user.displayName);
 
-          const userRef = await createUserProfileDocument(user);
+    //       const userRef = await createUserProfileDocument(user);
 
-          // // console.log("user", user);
-          userRef.onSnapshot((snap) => {
-            this.setState({
-              user: {
-                id: snap.id,
-                ...snap.data(),
-              },
-              loading: false,
-            });
-          });
-        } else {
-          this.setState({ user, loading: false });
-        }
+    //       // // console.log("user", user);
+    //       userRef.onSnapshot((snap) => {
+    //         this.setState({
+    //           user: {
+    //             id: snap.id,
+    //             ...snap.data(),
+    //           },
+    //           loading: false,
+    //         });
+    //       });
+    //     } else {
+    //       this.setState({ user, loading: false });
+    //     }
 
-        // console.log(user);
-      });
+    //     // console.log(user);
+    //   });
   }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  componentWillUnmount() {}
   handleLogout = async () => {
-    await firebase.auth().signOut();
-    this.props.dispatch(logout());
+    // await firebase.auth().signOut();
+    this.props.dispatch(SIGNOUT());
   };
   render() {
     const { navigation } = this.props;
@@ -99,7 +102,7 @@ class Forum extends Component {
                     },
                   ]}
                 >
-                  {this.state.user && this.state.user.displayName}
+                  {this.state.user && this.state.user.user_nicename}
                 </Title>
                 <View style={{ flexDirection: "row", alignItems: "baseline" }}>
                   <Badge
@@ -132,7 +135,23 @@ class Forum extends Component {
             <View style={styles.row}>
               <MaterialIcons name="email" color="#777777" size={20} />
               <Text style={{ color: "#777777", marginLeft: 20 }}>
-                {this.state.user && this.state.user.email}
+                {this.state.user && this.state.user.user_email}
+              </Text>
+            </View>
+            <View style={styles.row}>
+              <Feather
+                name={
+                  this.state.user && this.state.user.membership_id
+                    ? "user-check"
+                    : "user-x"
+                }
+                color="#777777"
+                size={20}
+              />
+              <Text style={{ color: "#777777", marginLeft: 20 }}>
+                {this.state.user && this.state.user.membership_id
+                  ? "Member"
+                  : "You're not a member"}
               </Text>
             </View>
           </View>
@@ -157,18 +176,36 @@ class Forum extends Component {
             </View> */}
 
           <View style={styles.menuWrapper}>
-            <TouchableRipple
-              onPress={() =>
-                this.props.navigation.push("Chat", {
-                  user: this.state.user,
-                })
-              }
-            >
-              <View style={styles.menuItem}>
-                <Ionicons name="ios-chatboxes" color="#777" size={25} />
-                <Text style={styles.menuItemText}>Forum Chat</Text>
-              </View>
-            </TouchableRipple>
+            {this.state.user && this.state.user.membership_id ? (
+              <TouchableRipple
+                onPress={() =>
+                  this.props.navigation.push("Chat", {
+                    user: this.state.user,
+                  })
+                }
+              >
+                <View style={styles.menuItem}>
+                  <Ionicons name="ios-chatboxes" color="#777" size={25} />
+                  <Text style={styles.menuItemText}>Forum Chat</Text>
+                </View>
+              </TouchableRipple>
+            ) : (
+              <TouchableRipple
+              // onPress={() =>
+              //   this.props.navigation.push("Chat", {
+              //     user: this.state.user,
+              //   })
+              // }
+              >
+                <View style={styles.menuItem}>
+                  <Ionicons name="ios-chatboxes" color="#777" size={25} />
+                  <Text style={styles.menuItemText}>
+                    Please purchase a membership to access forum
+                  </Text>
+                </View>
+              </TouchableRipple>
+            )}
+
             {/* <TouchableRipple onPress={() => {}}>
                 <View style={styles.menuItem}> */}
             {/* <Icon name="credit-card" color="#FF6347" size={25} /> */}
@@ -215,10 +252,16 @@ class Forum extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  // console.log("state=>", state);
+  return {
+    user: state.auth.user,
+  };
+};
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
 });
-export default connect(null, mapDispatchToProps)(Forum);
+export default connect(mapStateToProps, mapDispatchToProps)(Forum);
 
 const styles = StyleSheet.create({
   container: {

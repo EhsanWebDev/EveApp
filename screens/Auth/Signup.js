@@ -6,6 +6,9 @@ import { LinearGradient } from "expo-linear-gradient";
 import firebase from "firebase";
 import { ActivityIndicator } from "react-native-paper";
 import { createUserProfileDocument } from "../../Firebase";
+import { showMessage } from "react-native-flash-message";
+import { createUser } from "../../store/actions/auth";
+import { connect } from "react-redux";
 
 class Signup extends Component {
   state = {
@@ -15,6 +18,7 @@ class Signup extends Component {
     error: false,
     loading: false,
     displayName: "",
+    errorEmail: false,
   };
   handleCheck = () => {
     const { checked } = this.state;
@@ -24,25 +28,90 @@ class Signup extends Component {
       this.setState({ checked: "check" });
     }
   };
+  textInputChangeEmail = (val) => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (re.test(String(val).toLowerCase())) {
+      this.setState({
+        email: val,
+        errorEmail: false,
+      });
+    } else {
+      this.setState({
+        email: val,
+        errorEmail: "Please enter a valid email address",
+      });
+    }
+  };
   signup = async () => {
     this.setState({ loading: true });
-    const { email, password, displayName } = this.state;
-    if (displayName.length <= 0) {
-      alert("please enter display name");
+    const { email, password, displayName, errorEmail } = this.state;
+    if (
+      email.length === 0 ||
+      password.length === 0 ||
+      displayName.length === 0 ||
+      errorEmail
+    ) {
+      showMessage({
+        type: "danger",
+        message: "All fields are required",
+        duration: 1500,
+        icon: "danger",
+      });
+      //  setLoading(false);
       this.setState({ loading: false });
       return;
     } else {
-      const { user } = await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password);
-      await createUserProfileDocument(user, displayName);
-      this.setState({
-        loading: false,
-        email: "",
-        password: "",
-        error: false,
-      });
+      const payload = {
+        name: displayName,
+        email,
+        password,
+      };
+      const res = await this.props.dispatch(createUser(payload));
+      // console.log('res', res);
+      if (res.status) {
+        // setLoading(false);
+        this.setState({ loading: false });
+        // console.log('User', user);
+        // setLoading(false);
+        // const token = makeid(5);
+        // // console.log(token);
+        // const userData = [
+        //   {
+        //     ...user,
+        //     userToken: token,
+        //   },
+        // ];
+        // // console.log(userData);
+        // signIn(userData);
+      } else {
+        // setLoading(false);
+        this.setState({ loading: false });
+        // alert(res.message);
+        showMessage({
+          type: "danger",
+          message: res.data.message,
+          duration: 1500,
+          icon: "danger",
+        });
+      }
     }
+    // if (displayName.length <= 0) {
+    //   alert("please enter display name");
+    //   this.setState({ loading: false });
+    //   return;
+    // } else {
+    //   const { user } = await firebase
+    //     .auth()
+    //     .createUserWithEmailAndPassword(email, password);
+    //   await createUserProfileDocument(user, displayName);
+    //   this.setState({
+    //     loading: false,
+    //     email: "",
+    //     password: "",
+    //     error: false,
+    //   });
+    // }
 
     // this.props.navigation.navigate("Forum", {
     //   uid: user.uid,
@@ -117,10 +186,15 @@ class Signup extends Component {
           />
           <Input
             placeholder="Enter email"
-            handleChange={(email) => this.setState({ email })}
+            handleChange={(email) => this.textInputChangeEmail(email)}
             value={this.state.email}
             email={true}
           />
+          {this.state.errorEmail && (
+            <Text style={{ color: "#c0392b", paddingLeft: 40 }}>
+              {this.state.errorEmail}
+            </Text>
+          )}
           <Input
             placeholder="Enter password"
             password={true}
@@ -171,5 +245,11 @@ class Signup extends Component {
     }
   }
 }
-
-export default Signup;
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+  error: state.auth.error,
+});
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

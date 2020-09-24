@@ -1,6 +1,9 @@
-//Types for user login
-export const LOGIN_USER_SUCCESS = "login_user_success";
-export const LOGIN_USER_FAILURE = "login_user_failure";
-export const LOGIN_USER_START = "login_user_start";
-export const USER_DATA_SUCCESS = "user_data_success";
-export const LOGOUT = "logout";
+export const actionTypes = {
+  LOGIN_LOADING: 'LOGIN_LOADING',
+  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
+  LOGIN_FAIL: 'LOGIN_FAIL',
+
+  CATEGORY_LOADING: 'CATEGORY_LOADING',
+  CATEGORY_SUCCESS: 'CATEGORY_SUCCESS',
+  CATEGORY_FAIL: 'CATEGORY_FAIL',
+};

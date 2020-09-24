@@ -5,6 +5,9 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import firebase from "firebase";
 import { ActivityIndicator } from "react-native-paper";
+import { connect } from "react-redux";
+import { loginUser } from "../../store/actions/auth";
+import { showMessage } from "react-native-flash-message";
 class Login extends Component {
   state = {
     email: "",
@@ -22,26 +25,66 @@ class Login extends Component {
     }
   };
 
-  login = (email, password) => {
+  login = async (email, password) => {
     this.setState({ loading: true });
-
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.setState({
-          loading: false,
-          email: "",
-          password: "",
-          error: false,
+    const { dispatch } = this.props;
+    const payload = {
+      email,
+      password,
+    };
+    if (email.length === 0 || password.length === 0) {
+      // alert("Please provide valid credentials");
+      showMessage({
+        type: "danger",
+        message: "Please provide valid credentials",
+        duration: 1500,
+        icon: "danger",
+      });
+      //  setLoading(false);
+      this.setState({ loading: false });
+      return;
+    } else {
+      const res = await dispatch(loginUser(payload));
+      if (res.data.status) {
+        //  setLoading(false);
+        this.setState({ loading: false });
+      } else {
+        //  setLoading(false);
+        //  setData({
+        //    ...data,
+        //    email: "",
+        //    password: "",
+        //    check_textInputChange: false,
+        //  });
+        //  alert("Incorrect Credentials");
+        this.setState({ loading: false });
+        showMessage({
+          type: "danger",
+          message: "Incorrect Credentials",
+          duration: 1500,
+          icon: "danger",
         });
-        // this.props.navigation.navigate("Forum", {
-        //   uid: user.user.uid,
-        // });
-      })
-      .catch((error) =>
-        this.setState({ error: error.message, loading: false })
-      );
+      }
+      // console.log(email, password);
+    }
+
+    // firebase
+    //   .auth()
+    //   .signInWithEmailAndPassword(email, password)
+    //   .then((user) => {
+    //     this.setState({
+    //       loading: false,
+    //       email: "",
+    //       password: "",
+    //       error: false,
+    //     });
+    //     // this.props.navigation.navigate("Forum", {
+    //     //   uid: user.user.uid,
+    //     // });
+    //   })
+    //   .catch((error) =>
+    //     this.setState({ error: error.message, loading: false })
+    //   );
   };
   render() {
     if (this.state.loading) {
@@ -192,5 +235,11 @@ class Login extends Component {
     }
   }
 }
-
-export default Login;
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+  error: state.auth.error,
+});
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

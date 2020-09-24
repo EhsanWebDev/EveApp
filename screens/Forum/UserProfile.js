@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import { Title, ActivityIndicator, Avatar, Button } from "react-native-paper";
+import {
+  Title,
+  ActivityIndicator,
+  Avatar,
+  Button,
+  Paragraph,
+} from "react-native-paper";
 
 // import { Container } from './styles';
 
@@ -8,6 +14,7 @@ const UserProfile = ({ route }) => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     setUser(route.params.props);
+    console.log(route.params.props);
   }, []);
   if (user) {
     return (
@@ -15,15 +22,16 @@ const UserProfile = ({ route }) => {
         <View style={{ flex: 1, alignItems: "center" }}>
           <Avatar.Text label={user.name.slice(0, 1)} />
           <Title style={{ marginTop: 10 }}>{user.name}</Title>
+          <Paragraph style={{ marginTop: 10 }}>{user.email}</Paragraph>
         </View>
 
-        <Button
+        {/* <Button
           mode="contained"
           icon="account-star"
           style={{ marginBottom: 20, marginHorizontal: 40, borderRadius: 5 }}
         >
           Follow
-        </Button>
+        </Button> */}
       </View>
     );
   } else {

@@ -23,36 +23,15 @@ import firebase from "firebase";
 import { createUserProfileDocument } from "../../Firebase";
 
 const { width, height } = Dimensions.get("screen");
-const Home = ({ navigation }) => {
-  const [user, setUser] = useState(null);
+const Home = ({ navigation, user }) => {
+  // const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     console.log(user);
-    let subscriber = "";
-    const userFunc = async () => {
-      subscriber = firebase.auth().onAuthStateChanged(async (user) => {
-        if (user) {
-          const userRef = await createUserProfileDocument(user);
-
-          // // console.log("user", user);
-          userRef.onSnapshot((snap) => {
-            setUser({
-              id: snap.id,
-              ...snap.data(),
-            });
-
-            setLoading(false);
-          });
-        } else {
-          //
-        }
-      });
-    };
-    userFunc();
-    console.log(user);
-
-    return subscriber; // unsubscribe on unmount
+    if (user) {
+      setLoading(false);
+    }
   }, []);
   if (loading) {
     return (
@@ -78,12 +57,12 @@ const Home = ({ navigation }) => {
       <Appbar.Header style={{ backgroundColor: "#9A1458" }}>
         <Appbar.Content
           title="Bridget Marie"
-          subtitle={`Welcome ${user && user.displayName}`}
+          subtitle={`Welcome ${user && user.user_nicename}`}
         />
         <Avatar.Text
           size={50}
           style={{ backgroundColor: "#9A1458" }}
-          label={user.displayName.slice(0, 1)}
+          label={user && user.user_nicename.slice(0, 1)}
         />
       </Appbar.Header>
       <Image
@@ -117,6 +96,8 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state) => {
   console.log("state=>", state);
-  return state;
+  return {
+    user: state.auth.user,
+  };
 };
 export default connect(mapStateToProps)(Home);

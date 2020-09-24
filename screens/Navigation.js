@@ -41,6 +41,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { View } from "react-native";
 import { connect } from "react-redux";
 import { loginUserSuccess } from "../store/actions";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -150,20 +151,37 @@ const Navigation = ({ user, dispatch }) => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  async function onAuthStateChanged(user) {
-    // console.log(user);
-    setLoading(false);
-    if (user) {
-      console.log(user);
-      dispatch(loginUserSuccess(user));
-      //   setUser(user.user);
-    }
-  }
+  // async function onAuthStateChanged(user) {
+  //   // console.log(user);
+  //   setLoading(false);
+  //   if (user) {
+  //     console.log(user);
+  //     dispatch(loginUserSuccess(user));
+  //     //   setUser(user.user);
+  //   }
+  // }
 
-  useEffect(() => {
-    console.log(user, dispatch);
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
+  // useEffect(() => {
+  //   console.log(user, dispatch);
+
+  //   // const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+  //   return subscriber; // unsubscribe on unmount
+  // }, []);
+
+  React.useEffect(() => {
+    // console.log(user);
+    setTimeout(async () => {
+      let userToken;
+      userToken = null;
+      try {
+        userToken = await AsyncStorage.getItem("userToken");
+      } catch (e) {
+        console.log(e);
+      }
+      console.log("user token: ", userToken);
+      dispatch({ type: "RETRIEVE_TOKEN", user: JSON.parse(userToken) });
+      setLoading(false);
+    }, 100);
   }, []);
   if (loading) {
     return (
