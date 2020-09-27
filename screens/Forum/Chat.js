@@ -95,9 +95,10 @@ export default function Chat({ route, navigation }) {
   async function readUser() {
     // const user = await AsyncStorage.getItem("user");
     const user = route.params.user;
+    console.log(user);
     const myUser = {};
     myUser.name = user.user_nicename;
-    myUser._id = user.ID;
+    myUser._id = user.id;
     myUser.email = user.user_email;
 
     if (user) {

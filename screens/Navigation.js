@@ -33,6 +33,7 @@ import {
   MaterialIcons,
   FontAwesome5,
   SimpleLineIcons,
+  Octicons,
 } from "@expo/vector-icons";
 
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
@@ -42,6 +43,8 @@ import { View } from "react-native";
 import { connect } from "react-redux";
 import { loginUserSuccess } from "../store/actions";
 import AsyncStorage from "@react-native-community/async-storage";
+import MemberShip from "./Forum/MemberShip";
+import Notification from "./Notification";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -75,7 +78,7 @@ function MyTabs() {
           tabBarColor: "#1B1464",
 
           tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="book-open" size={28} color={color} />
+            <Octicons name="dashboard" size={28} color={color} />
           ),
         }}
         component={CourseStackScreen}
@@ -83,7 +86,7 @@ function MyTabs() {
       <Tab.Screen
         name="Forum"
         options={{
-          tabBarColor: "#1289A7",
+          tabBarColor: "#2980b9",
           // tabBarBadge: true,
           tabBarIcon: ({ color }) => (
             <SimpleLineIcons name="user" size={24} color={color} />
@@ -119,6 +122,9 @@ const ForumStackScreen = () => (
     <ForumStack.Screen name="Profile" component={UserProfile} />
     <ForumStack.Screen name="Events" component={Events} />
     <ForumStack.Screen name="Contact" component={ContactUs} />
+    <ForumStack.Screen name="MemberShip" component={MemberShip} />
+    <ForumStack.Screen name="Notification" component={Notification} />
+    {/* <ForumStack.Screen name="MemberShip" component={MemberShip} /> */}
   </ForumStack.Navigator>
 );
 const ShopStackScreen = () => (

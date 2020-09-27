@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, SafeAreaView, StyleSheet } from "react-native";
+import { View, SafeAreaView, StyleSheet, StatusBar } from "react-native";
 import firebase from "firebase";
 import {
   Title,
@@ -10,11 +10,13 @@ import {
   Caption,
   Text,
   Badge,
+  Appbar,
 } from "react-native-paper";
 import cons from "expo-constants";
 import { createUserProfileDocument } from "../../Firebase";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
+import RNemail from "react-native-email";
 import {
   Ionicons,
   MaterialIcons,
@@ -59,7 +61,17 @@ class Forum extends Component {
     //     // console.log(user);
     //   });
   }
-
+  handleEmail = () => {
+    // console.log("working");
+    const to = ["admin@bridgetmariecentre.org"]; // string or array of email addresses
+    RNemail(to, {
+      // Optional additional arguments
+      // cc: ["bazzy@moo.com", "doooo@daaa.com"], // string or array of email addresses
+      // bcc: "mee@mee.com", // string or array of email addresses
+      subject: "",
+      body: ``,
+    }).catch(console.error);
+  };
   componentWillUnmount() {}
   handleLogout = async () => {
     // await firebase.auth().signOut();
@@ -82,15 +94,29 @@ class Forum extends Component {
     }
 
     return (
-      <View style={{ flex: 1, marginTop: cons.statusBarHeight }}>
+      <View style={{ flex: 1 }}>
+        <StatusBar barStyle="light-content" backgroundColor="#9A1458" />
+        <Appbar.Header style={{ backgroundColor: "#9A1458" }}>
+          <Appbar.Content
+            title="Bridget Marie"
+            subtitle={`Welcome to your profile page`}
+          />
+          <Avatar.Text
+            size={50}
+            style={{ backgroundColor: "#9A1458" }}
+            label={this.state.user && this.state.user.user_nicename.slice(0, 1)}
+          />
+        </Appbar.Header>
         <SafeAreaView style={styles.container}>
           <View style={styles.userInfoSection}>
-            <View style={{ flexDirection: "row", marginTop: 15 }}>
+            <View style={{ flexDirection: "row", marginTop: 25 }}>
               <Avatar.Image
-                source={{
-                  uri: "https://api.adorable.io/avatars/80/abott@adorable.png",
-                }}
+                source={require("../../assets/regular.png")}
                 size={80}
+                style={{
+                  marginLeft: -15,
+                  backgroundColor: "#9A1458",
+                }}
               />
               <View style={{ marginLeft: 20 }}>
                 <Title
@@ -191,16 +217,22 @@ class Forum extends Component {
               </TouchableRipple>
             ) : (
               <TouchableRipple
-              // onPress={() =>
-              //   this.props.navigation.push("Chat", {
-              //     user: this.state.user,
-              //   })
-              // }
+                onPress={() => this.props.navigation.push("MemberShip")}
               >
                 <View style={styles.menuItem}>
-                  <Ionicons name="ios-chatboxes" color="#777" size={25} />
-                  <Text style={styles.menuItemText}>
-                    Please purchase a membership to access forum
+                  <Ionicons
+                    name="ios-chatboxes"
+                    color="#9A1458"
+                    size={25}
+                    style={{ paddingTop: 10 }}
+                  />
+                  <Text
+                    style={[
+                      styles.menuItemText,
+                      { color: "#9A1458", flex: 1, marginHorizontal: 60 },
+                    ]}
+                  >
+                    Forum is for members only ! Click to buy one
                   </Text>
                 </View>
               </TouchableRipple>
@@ -218,12 +250,29 @@ class Forum extends Component {
                 <Text style={styles.menuItemText}>Events</Text>
               </View>
             </TouchableRipple>
-            <TouchableRipple onPress={() => navigation.push("Contact")}>
+            <TouchableRipple onPress={() => this.handleEmail()}>
               <View style={styles.menuItem}>
                 <MaterialIcons name="contact-mail" color="#777" size={25} />
-                <Text style={styles.menuItemText}>Contact Us</Text>
+                <Text style={styles.menuItemText}>
+                  admin@bridgetmariecentre.org
+                </Text>
               </View>
             </TouchableRipple>
+            {/* {this.state.user && this.state.user.id === "11" && ( */}
+            <TouchableRipple
+              onPress={() => navigation.navigate("Notification")}
+            >
+              <View style={styles.menuItem}>
+                <MaterialIcons
+                  name="notifications-active"
+                  color="#777"
+                  size={25}
+                />
+                <Text style={styles.menuItemText}>Send Notifications</Text>
+              </View>
+            </TouchableRipple>
+            {/* )} */}
+
             {/* <TouchableRipple onPress={() => {}}>
                 <View style={styles.menuItem}>
                   <MaterialIcons name="settings" color="#777777" size={25} />
@@ -242,7 +291,7 @@ class Forum extends Component {
         >
           <Button
             mode="contained"
-            style={{ backgroundColor: "#c44569" }}
+            style={{ backgroundColor: "#9A1458" }}
             onPress={() => this.handleLogout()}
           >
             Sign Out

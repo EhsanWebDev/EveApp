@@ -247,7 +247,7 @@ class Notes extends React.Component {
           >
             <Button
               mode="contained"
-              style={{ borderRadius: 8, backgroundColor: "#9A1458" }}
+              style={{ borderRadius: 8, backgroundColor: "#7fb069" }}
               onPress={() => this.handleNotesChange()}
             >
               Save
@@ -272,6 +272,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     marginTop: Cons.statusBarHeight,
+    marginHorizontal: 3,
   },
   notes_container: {
     flex: 1,

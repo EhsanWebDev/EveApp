@@ -12,7 +12,7 @@ export default class Courses extends React.Component {
             <ActivityIndicator size="large" />
           </View>
         )}
-        source={{ uri: "https://bridgetmariecentre.org/courses-2/" }}
+        source={{ uri: " https://bridgetmariecentre.org/academy-dashboard/" }}
         style={{ flex: 1 }}
       />
     );

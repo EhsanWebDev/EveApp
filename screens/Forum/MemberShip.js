@@ -12,7 +12,7 @@ export default class MemberShip extends React.Component {
             <ActivityIndicator size="large" />
           </View>
         )}
-        source={{ uri: "https://bridgetmariecentre.org/courses-2/" }}
+        source={{ uri: "https://bridgetmariecentre.org/academy/" }}
         style={{ flex: 1 }}
       />
     );

@@ -449,19 +449,25 @@ class EvePlanner extends React.Component {
             >
               <List.Accordion
                 title="My New Eve Union"
+                titleStyle={{ color: "white" }}
                 id="1"
                 style={{
-                  marginVertical: 5,
+                  marginVertical: 10,
                   marginHorizontal: 10,
                   borderColor: "#777",
                   borderWidth: 1,
-                  borderBottomColor: "transparent",
+                  backgroundColor: "#9A1458",
+
+                  // borderColor: "transparent",
                 }}
               >
                 <View
                   style={{
-                    marginHorizontal: 20,
-                    paddingVertical: 5,
+                    marginHorizontal: 10,
+                    paddingVertical: 15,
+                    paddingHorizontal: 15,
+                    borderColor: "#000",
+                    borderWidth: 1,
                     paddingBottom: 20,
                   }}
                 >
@@ -470,7 +476,7 @@ class EvePlanner extends React.Component {
                     vision for my family & career at this time?
                   </Text>
                   <TextInput
-                    // mode="outlined"
+                    mode={unionVal ? "flat" : "outlined"}
                     label={unionVal ? "" : "Enter your text"}
                     value={union}
                     disabled={unionVal ? true : false}
@@ -484,7 +490,7 @@ class EvePlanner extends React.Component {
                     style={[
                       styles.goalsBtn,
                       {
-                        backgroundColor: unionVal ? "#f39c12" : "#9A1458",
+                        backgroundColor: "#7fb069",
                       },
                     ]}
                     onPress={() => this.handleUnionChange()}
@@ -495,20 +501,25 @@ class EvePlanner extends React.Component {
               </List.Accordion>
               <List.Accordion
                 title="My New Eve Confidence"
+                titleStyle={{ color: "white" }}
                 id="2"
                 style={{
                   marginVertical: 5,
                   marginHorizontal: 10,
                   borderColor: "#777",
                   borderWidth: 1,
-                  borderBottomColor: "transparent",
+                  backgroundColor: "#9A1458",
                 }}
               >
                 <View
                   style={{
-                    marginHorizontal: 20,
-                    paddingVertical: 5,
+                    marginHorizontal: 10,
+
                     paddingBottom: 20,
+                    paddingVertical: 15,
+                    paddingHorizontal: 15,
+                    borderColor: "#000",
+                    borderWidth: 1,
                   }}
                 >
                   <Text style={{ textAlign: "justify", letterSpacing: 1.5 }}>
@@ -516,7 +527,7 @@ class EvePlanner extends React.Component {
                     goals for this month?
                   </Text>
                   <TextInput
-                    // mode="outlined"
+                    mode={confidenceVal ? "flat" : "outlined"}
                     label={confidenceVal ? "" : "Enter your text"}
                     value={confidence}
                     multiline
@@ -529,7 +540,7 @@ class EvePlanner extends React.Component {
                     style={[
                       styles.goalsBtn,
                       {
-                        backgroundColor: confidenceVal ? "#f39c12" : "#9A1458",
+                        backgroundColor: "#7fb069",
                       },
                     ]}
                     onPress={() => this.handleConfidenceChange()}
@@ -540,19 +551,23 @@ class EvePlanner extends React.Component {
               </List.Accordion>
               <List.Accordion
                 title="My New Eve Diet"
+                titleStyle={{ color: "white" }}
                 id="3"
                 style={{
                   marginVertical: 5,
                   marginHorizontal: 10,
                   borderColor: "#777",
                   borderWidth: 1,
-                  borderBottomColor: "transparent",
+                  backgroundColor: "#9A1458",
                 }}
               >
                 <View
                   style={{
-                    marginHorizontal: 20,
-                    paddingVertical: 5,
+                    marginHorizontal: 10,
+                    paddingVertical: 15,
+                    paddingHorizontal: 15,
+                    borderColor: "#000",
+                    borderWidth: 1,
                     paddingBottom: 20,
                   }}
                 >
@@ -561,7 +576,7 @@ class EvePlanner extends React.Component {
                     diet this month?
                   </Text>
                   <TextInput
-                    // mode="outlined"
+                    mode={dietVal ? "flat" : "outlined"}
                     label={dietVal ? "" : "Enter your text"}
                     value={diet}
                     multiline
@@ -574,7 +589,7 @@ class EvePlanner extends React.Component {
                     style={[
                       styles.goalsBtn,
                       {
-                        backgroundColor: dietVal ? "#f39c12" : "#9A1458",
+                        backgroundColor: "#7fb069",
                       },
                     ]}
                     onPress={() => this.handleDietChange()}
@@ -585,19 +600,23 @@ class EvePlanner extends React.Component {
               </List.Accordion>
               <List.Accordion
                 title="My New Eve Rhythm"
+                titleStyle={{ color: "white" }}
                 id="4"
                 style={{
                   marginVertical: 5,
                   marginHorizontal: 10,
                   borderColor: "#777",
                   borderWidth: 1,
-                  borderBottomColor: "transparent",
+                  backgroundColor: "#9A1458",
                 }}
               >
                 <View
                   style={{
-                    marginHorizontal: 20,
-                    paddingVertical: 5,
+                    marginHorizontal: 10,
+                    paddingVertical: 15,
+                    paddingHorizontal: 15,
+                    borderColor: "#000",
+                    borderWidth: 1,
                     paddingBottom: 20,
                   }}
                 >
@@ -606,7 +625,7 @@ class EvePlanner extends React.Component {
                     month?
                   </Text>
                   <TextInput
-                    // mode="outlined"
+                    mode={rhythmVal ? "flat" : "outlined"}
                     label={rhythmVal ? "" : "Enter your text"}
                     value={rhythm}
                     multiline
@@ -619,7 +638,7 @@ class EvePlanner extends React.Component {
                     style={[
                       styles.goalsBtn,
                       {
-                        backgroundColor: rhythmVal ? "#f39c12" : "#9A1458",
+                        backgroundColor: "#7fb069",
                       },
                     ]}
                     onPress={() => this.handleRhythmChange()}
@@ -630,19 +649,23 @@ class EvePlanner extends React.Component {
               </List.Accordion>
               <List.Accordion
                 title="My New Eve Influence"
+                titleStyle={{ color: "white" }}
                 id="5"
                 style={{
                   marginVertical: 5,
                   marginHorizontal: 10,
                   borderColor: "#777",
                   borderWidth: 1,
-                  borderBottomColor: "transparent",
+                  backgroundColor: "#9A1458",
                 }}
               >
                 <View
                   style={{
-                    marginHorizontal: 20,
-                    paddingVertical: 5,
+                    marginHorizontal: 10,
+                    paddingVertical: 15,
+                    paddingHorizontal: 15,
+                    borderColor: "#000",
+                    borderWidth: 1,
                     paddingBottom: 20,
                   }}
                 >
@@ -651,7 +674,7 @@ class EvePlanner extends React.Component {
                     month?
                   </Text>
                   <TextInput
-                    // mode="outlined"
+                    mode={influenceVal ? "flat" : "outlined"}
                     label={influenceVal ? "" : "Enter your text"}
                     value={influence}
                     multiline
@@ -664,7 +687,7 @@ class EvePlanner extends React.Component {
                     style={[
                       styles.goalsBtn,
                       {
-                        backgroundColor: influenceVal ? "#f39c12" : "#9A1458",
+                        backgroundColor: "#7fb069",
                       },
                     ]}
                     onPress={() => this.handleInfluenceChange()}
@@ -699,8 +722,21 @@ class EvePlanner extends React.Component {
                   <Text style={[styles.head, { width: "65%" }]}>Activity</Text>
                 </View>
                 <View style={styles.row}>
-                  <Text style={[styles.body, { width: "35%" }]}>5am – 6am</Text>
+                  <Text
+                    style={[
+                      styles.body,
+                      {
+                        width: "35%",
+                      },
+                    ]}
+                  >
+                    5am – 6am
+                  </Text>
                   <TextInput
+                    multiline
+                    // numberOfLines={2}
+                    // mode="outlined"
+
                     value={five_to_six}
                     onChangeText={(five_to_six) =>
                       this.setState({ five_to_six })
@@ -711,6 +747,7 @@ class EvePlanner extends React.Component {
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>6am – 7am</Text>
                   <TextInput
+                    multiline
                     value={six_to_seven}
                     onChangeText={(six_to_seven) =>
                       this.setState({ six_to_seven })
@@ -721,6 +758,7 @@ class EvePlanner extends React.Component {
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>7am – 8am</Text>
                   <TextInput
+                    multiline
                     value={seven_to_eight}
                     onChangeText={(seven_to_eight) =>
                       this.setState({ seven_to_eight })
@@ -731,6 +769,7 @@ class EvePlanner extends React.Component {
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>8am – 9am</Text>
                   <TextInput
+                    multiline
                     value={eight_to_nine}
                     onChangeText={(eight_to_nine) =>
                       this.setState({ eight_to_nine })
@@ -743,6 +782,7 @@ class EvePlanner extends React.Component {
                     9am – 10am
                   </Text>
                   <TextInput
+                    multiline
                     value={nine_to_ten}
                     onChangeText={(nine_to_ten) =>
                       this.setState({ nine_to_ten })
@@ -755,6 +795,7 @@ class EvePlanner extends React.Component {
                     10am – 11am
                   </Text>
                   <TextInput
+                    multiline
                     value={ten_to_eleven}
                     onChangeText={(ten_to_eleven) =>
                       this.setState({ ten_to_eleven })
@@ -767,6 +808,7 @@ class EvePlanner extends React.Component {
                     11am – 12pm
                   </Text>
                   <TextInput
+                    multiline
                     value={eleven_to_twelve_pm}
                     onChangeText={(eleven_to_twelve_pm) =>
                       this.setState({ eleven_to_twelve_pm })
@@ -779,6 +821,7 @@ class EvePlanner extends React.Component {
                     12pm – 1pm
                   </Text>
                   <TextInput
+                    multiline
                     value={twelve_to_one_pm}
                     onChangeText={(twelve_to_one_pm) =>
                       this.setState({ twelve_to_one_pm })
@@ -789,6 +832,7 @@ class EvePlanner extends React.Component {
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>1pm – 2pm</Text>
                   <TextInput
+                    multiline
                     value={one_to_two_pm}
                     onChangeText={(one_to_two_pm) =>
                       this.setState({ one_to_two_pm })
@@ -799,6 +843,7 @@ class EvePlanner extends React.Component {
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>2pm – 3pm</Text>
                   <TextInput
+                    multiline
                     value={two_to_three_pm}
                     onChangeText={(two_to_three_pm) =>
                       this.setState({ two_to_three_pm })
@@ -809,6 +854,7 @@ class EvePlanner extends React.Component {
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>3pm – 4pm</Text>
                   <TextInput
+                    multiline
                     value={three_to_four_pm}
                     onChangeText={(three_to_four_pm) =>
                       this.setState({ three_to_four_pm })
@@ -819,6 +865,7 @@ class EvePlanner extends React.Component {
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>4pm – 5pm</Text>
                   <TextInput
+                    multiline
                     value={four_to_five_pm}
                     onChangeText={(four_to_five_pm) =>
                       this.setState({ four_to_five_pm })
@@ -829,6 +876,7 @@ class EvePlanner extends React.Component {
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>5pm – 6pm</Text>
                   <TextInput
+                    multiline
                     value={five_to_six_pm}
                     onChangeText={(five_to_six_pm) =>
                       this.setState({ five_to_six_pm })
@@ -839,6 +887,7 @@ class EvePlanner extends React.Component {
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>6pm – 7pm</Text>
                   <TextInput
+                    multiline
                     value={six_to_seven_pm}
                     onChangeText={(six_to_seven_pm) =>
                       this.setState({ six_to_seven_pm })
@@ -849,6 +898,7 @@ class EvePlanner extends React.Component {
                 <View style={styles.row}>
                   <Text style={[styles.body, { width: "35%" }]}>7pm – 8pm</Text>
                   <TextInput
+                    multiline
                     value={seven_to_eight_pm}
                     onChangeText={(seven_to_eight_pm) =>
                       this.setState({ seven_to_eight_pm })
@@ -858,7 +908,11 @@ class EvePlanner extends React.Component {
                 </View>
               </View>
               <View style={{ marginTop: 30, marginHorizontal: 40 }}>
-                <Button mode="contained" onPress={() => this.saveTime()}>
+                <Button
+                  mode="contained"
+                  onPress={() => this.saveTime()}
+                  style={{ backgroundColor: "#7fb069" }}
+                >
                   SAVE CHANGES
                 </Button>
               </View>
@@ -970,7 +1024,9 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     overflow: "hidden",
-
+    alignItems: "center",
+    borderColor: "#000",
+    borderWidth: 1,
     // marginVertical: 2,
   },
   head: {
@@ -980,47 +1036,50 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
-    borderColor: "#000",
-    borderBottomColor: "#fff",
-    borderWidth: 1,
+    // borderColor: "#000",
+    // borderBottomColor: "#fff",
+    // borderWidth: 1,
     paddingVertical: 5,
   },
   body: {
     width: "50%",
     // backgroundColor: "#27ae60",
     // color: "white",
-    fontSize: 15,
+    fontSize: 14,
 
     letterSpacing: 1,
     // fontWeight: "bold",
     textAlign: "center",
-    paddingHorizontal: 10,
-    borderColor: "#000",
-    borderWidth: 1,
-    borderRightColor: "#000",
-    borderTopColor: "#fff",
+    paddingHorizontal: 5,
+    // borderColor: "#000",
+    // borderWidth: 4,
+    // borderRightColor: "#000",
+    // borderTopColor: "#fff",
     // paddingVertical: 5,
     textAlignVertical: "center",
-    height: 45,
+    // height: 45,
+    height: "100%",
+    borderRightColor: "#111",
+    borderRightWidth: 1,
   },
   goalsInput: {
-    marginTop: 16,
+    marginVertical: 16,
     fontSize: 18,
     backgroundColor: "white",
   },
   goalsBtn: {
-    marginTop: 10,
-    marginHorizontal: 20,
+    marginVertical: 10,
+    marginHorizontal: 30,
     borderRadius: 8,
   },
   input: {
     // paddingVertical: 1,
-    borderColor: "#000",
-    borderWidth: 1,
+    // borderColor: "#000",
+    // borderWidth: 1,
     // borderLeftColor: "transparent",
     backgroundColor: "white",
     borderTopColor: "white",
-    height: 40,
+    // height: 40,
   },
 });
 
